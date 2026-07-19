@@ -1,234 +1,297 @@
+<div align="center">
+
 Web Technology Detector
-======================
 
-A Python tool to detect technologies used by any website and generate beautiful HTML reports with a modern shadcn/ui-inspired design.
+Detect 100+ web technologies with beautiful shadcn/ui-inspired dark theme reports.
 
+[Installation](#installation)  [Usage](#usage)  [Features](#features)  [Contributing](#contributing)
 
-Overview
---------
+</div>
 
-Web Technology Detector analyzes websites to identify the frameworks, libraries, CMS, analytics tools, hosting providers, and other technologies they use. It then generates a clean, dark-mode HTML report that you can open in any browser.
+A Python tool that looks at any website and tells you what it's built with. Frameworks, CMS platforms, analytics tools, hosting providers, databases, CDNs. It generates stunning interactive HTML reports with search, filtering, confidence scoring, and version extraction. Everything you need to understand a site's tech stack in seconds.
 
+<br>
 
-Features
---------
+Why this exists
 
-- Detects 50+ technologies across multiple categories
-- Generates beautiful shadcn/ui-inspired dark mode reports
-- Fast analysis with pattern matching
-- Analyzes HTML, meta tags, and HTTP headers
-- Responsive design that works on all devices
-- Works as both a CLI tool and importable library
+When you land on a website and wonder what powers it, you usually have to dig through the source code, check HTTP headers, inspect scripts. This tool does all of that for you. Point it at a URL, and it returns a complete breakdown of every technology it can identify, along with a beautiful report you can open in your browser, share with your team, or save for later.
 
-
-Technologies Detected
----------------------
-
-JavaScript Frameworks
-  - React, Vue.js, Angular, Svelte, Solid.js, Preact
-  - Alpine.js, Stimulus, jQuery, Backbone.js, Ember.js
-
-CSS Frameworks
-  - Tailwind CSS, Bootstrap, Bulma, Foundation
-  - Material Design, Materialize CSS, Ant Design, shadcn/ui
-
-Static Site Generators
-  - Next.js, Nuxt.js, Gatsby, Hugo, Jekyll, Astro, Vite, Remix
-
-CMS Platforms
-  - WordPress, Drupal, Joomla, Shopify, Wix, Squarespace
-  - Ghost, Contentful, Webflow, TYPO3
-
-E-commerce
-  - Shopify, WooCommerce, BigCommerce, Magento, OpenCart
-
-Analytics
-  - Google Analytics, Google Tag Manager, Hotjar, Mixpanel
-  - Segment, Plausible, Matomo, Amplitude, Heap, FullStory
-  - Facebook Pixel, Microsoft Clarity
-
-Web Servers
-  - Nginx, Apache, LiteSpeed, IIS, Caddy
-
-Programming Languages
-  - PHP, Python, Ruby, Node.js, Java, .NET
-
-Hosting and CDN
-  - Cloudflare, AWS, Vercel, Netlify, Google Cloud
-  - Azure, Heroku, GitHub Pages, Fastly, Akamai
-
-Libraries
-  - Lodash, Moment.js, GSAP, Three.js, D3.js, Chart.js
-  - Anime.js, Swiper, Font Awesome, Google Fonts
-
-Security
-  - reCAPTCHA, hCaptcha, Cloudflare Turnstile
-
+<br>
 
 Installation
-------------
 
-Clone the repository:
+Clone the repo and install the dependencies.
 
-    git clone https://github.com/yourusername/web-tech-detector.git
-    cd web-tech-detector
+<pre>
+git clone https://github.com/waleedmasud/web-tech-detector.git
+cd web-tech-detector
+pip install -r requirements.txt
+</pre>
 
-Install dependencies:
+Or install it as a package.
 
-    pip install -r requirements.txt
+<pre>
+pip install -e .
+</pre>
 
-Or install as a package:
+<br>
 
-    pip install -e .
+Quick start
 
+Point the tool at any website and it will generate a report.
 
-Usage
------
+<pre>
+python -m web_tech_detector https://example.com
+</pre>
 
-Command Line
-^^^^^^^^^^^^
+If you installed the package, you can use the shorter command.
 
-Basic usage:
+<pre>
+tech-detector https://github.com
+</pre>
 
-    python -m web_tech_detector https://example.com
+The tool will open the report in your default browser automatically. If you prefer to keep the browser closed, pass the no-open flag.
 
-After installing the package:
+<pre>
+tech-detector https://shopify.com --no-open
+</pre>
 
-    tech-detector https://github.com
+<br>
 
-With options:
+All command line options
 
-    tech-detector https://wordpress.com --output ./reports
-    tech-detector https://shopify.com --no-open
+The tool accepts a range of flags to customize what it does.
 
-Interactive Mode
-^^^^^^^^^^^^^^^^
+<pre>
+tech-detector [url] [options]
 
-    python -m web_tech_detector
+Options:
 
-Then enter the URL when prompted.
+  -o, --output DIRECTORY    Where to save the report. Defaults to your
+                            current directory.
 
-As a Library
-^^^^^^^^^^^^
+  --no-open                 Don't open the report in your browser after
+                            generation.
 
-    from web_tech_detector.scraper import WebScraper
-    from web_tech_detector.detector import TechnologyDetector
-    from web_tech_detector.report import ReportGenerator
+  --json                    Export the raw detection data as a JSON file
+                            alongside the HTML report.
 
-    # Fetch the website
-    scraper = WebScraper("https://example.com")
-    scraper.fetch()
+  -v, --verbose             Show detailed output while the tool is running,
+                            including redirect chains and timing information.
 
-    # Detect technologies
-    detector = TechnologyDetector()
-    technologies = detector.detect_all(
-        html=scraper.html,
-        soup=scraper.soup,
-        http_headers=scraper.http_headers
-    )
+  --timeout SECONDS         How long to wait for the page to load.
+                            Default is 30 seconds.
 
-    # Generate report
-    results = {
-        "url": scraper.url,
-        "technologies": technologies,
-    }
-    generator = ReportGenerator(results)
-    generator.save("./output")
+  --no-redirect             Don't follow HTTP redirects. Useful if you want
+                            to inspect the first response only.
 
+  --check-robots            Fetch and include the site's robots.txt in the
+                            report.
 
-CLI Options
------------
+  --check-sitemap           Look for a sitemap.xml and include it in the
+                            report.
 
-    usage: tech-detector [-h] [-o OUTPUT] [--no-open] [-v] [url]
+  --no-social               Skip social media meta tag detection.
+</pre>
 
-    positional arguments:
-      url                   URL of the website to analyze
+<br>
 
-    optional arguments:
-      -h, --help            show this help message and exit
-      -o, --output OUTPUT   Output directory for the report
-      --no-open             Don't auto-open the report in browser
-      -v, --version         show program's version number and exit
+Using it as a Python library
 
+You can import the tool into your own Python projects and use it programmatically.
 
-Project Structure
------------------
+The simplest way.
 
-    web-tech-detector/
-    |-- README.md
-    |-- LICENSE
-    |-- requirements.txt
-    |-- setup.py
-    |-- .gitignore
-    |
-    |-- web_tech_detector/
-    |   |-- __init__.py
-    |   |-- __main__.py
-    |   |-- cli.py
-    |   |-- detector.py
-    |   |-- report.py
-    |   |-- scraper.py
-    |
-    |-- examples/
-        |-- sample_usage.py
+<pre>
+from web_tech_detector import analyze_url
 
-File Descriptions
-^^^^^^^^^^^^^^^^^
+report_path = analyze_url("https://example.com")
+</pre>
 
-    __init__.py     Package initialization and version info
-    __main__.py     Entry point for python -m command
-    cli.py          Command-line interface with argument parsing
-    detector.py     Technology detection logic and patterns
-    report.py       HTML report generator with shadcn/ui design
-    scraper.py      Web scraping and HTTP request handling
+If you want more control over each step, you can use the individual components.
 
+<pre>
+from web_tech_detector import WebScraper, TechnologyDetector, ReportGenerator
+from datetime import datetime
 
-Report Features
----------------
+scraper = WebScraper("https://example.com")
+scraper.fetch()
 
-The generated HTML reports include:
+detector = TechnologyDetector()
+technologies = detector.detect_all(scraper.html, scraper.soup, scraper.http_headers)
+meta_info = detector.detect_meta_info(scraper.soup)
+json_ld = detector.detect_json_ld(scraper.soup)
+server_info = detector.extract_server_info(scraper.http_headers)
+performance = detector.extract_performance_metrics(
+    scraper.html, scraper.http_headers, scraper.elapsed_time
+)
+social_meta = detector.detect_social_meta(scraper.soup)
+script_analysis = detector.detect_script_analysis(scraper.soup)
+link_analysis = detector.detect_links_analysis(scraper.soup)
+cookie_findings = detector.analyze_cookies(scraper.cookies)
 
-- Dark mode design by default
-- Statistics dashboard with key metrics
-- Meta information extracted from the page
-- Server details from HTTP headers
-- Technology badges color-coded by category
-- JSON-LD structured data when available
-- Fully responsive layout for mobile and desktop
-- Clean typography using Inter and JetBrains Mono fonts
+results = {
+    "url": scraper.url,
+    "technologies": technologies,
+    "meta_info": meta_info,
+    "json_ld": json_ld,
+    "server_info": server_info,
+    "performance": performance,
+    "social_meta": social_meta,
+    "script_analysis": script_analysis,
+    "link_analysis": link_analysis,
+    "cookie_findings": cookie_findings,
+    "detected_at": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+}
 
+generator = ReportGenerator(results)
+report_path = generator.save("./output")
+</pre>
+
+<br>
+
+What it detects
+
+The tool recognizes over 100 technologies grouped into the following categories.
+
+JavaScript Frameworks
+
+React, Vue.js, Angular, Svelte, Solid, Preact, Alpine.js, HTMX, Lit, jQuery, Backbone.js, Ember.js, MooTools, Dojo, Stimulus, Petite Vue.
+
+CSS Frameworks and Libraries
+
+Tailwind CSS, Bootstrap, Bulma, Foundation, Materialize CSS, Ant Design, Chakra UI, Radix UI, shadcn/ui, UnoCSS, Open Props, Pico CSS, Windi CSS, Emotion, Styled Components.
+
+Static Site Generators and Bundlers
+
+Next.js, Nuxt.js, Gatsby, Hugo, Jekyll, Astro, Vite, Remix, Webpack, Parcel, Rollup, ESBuild, SvelteKit.
+
+CMS Platforms
+
+WordPress, Drupal, Joomla, Wix, Squarespace, Ghost, Contentful, Webflow, TYPO3, Strapi, Sanity, Umbraco, Craft CMS.
+
+E-commerce
+
+Shopify, WooCommerce, BigCommerce, Magento, OpenCart, PrestaShop, Squarespace Commerce, Ecwid, Stripe, Snipcart, Gumroad, Lemon Squeezy.
+
+Analytics and Marketing
+
+Google Analytics, GA4, Google Tag Manager, Facebook Pixel, Hotjar, Mixpanel, Segment, Plausible, Matomo, Amplitude, Heap, FullStory, Microsoft Clarity, LinkedIn Insight Tag, Twitter Pixel, Reddit Pixel, HubSpot, Intercom, Crisp Chat, Tidio, Drift, Mouseflow, Crazy Egg, VWO, Optimizely, Google Ads.
+
+Web Servers
+
+Nginx, Apache, LiteSpeed, IIS, Caddy, Cloudflare Server, OpenResty, Tomcat.
+
+Programming Languages and Runtimes
+
+PHP, Python, Ruby, Node.js, .NET, Java, Go, Rust, Django, Flask, Ruby on Rails, Express, FastAPI, Deno, Bun.
+
+Hosting and CDN
+
+Cloudflare, AWS, Vercel, Netlify, Google Cloud, Azure, Heroku, GitHub Pages, GitLab Pages, Cloudflare Pages, Railway, Render, Fastly, Akamai, KeyCDN, CloudFront, bunny.net, jsDelivr, unpkg, cdnjs.
+
+UI Libraries and Components
+
+Material UI, Radix UI, Headless UI, Framer Motion, GSAP, Three.js, D3.js, Chart.js, ECharts, Anime.js, Swiper, React Router, React Query, Redux, Zustand, Pinia, Vuex, Prism.js, Highlight.js, AOS, Lodash, Moment.js, Day.js, date-fns, Axios, Socket.io, Font Awesome, Google Fonts, Adobe Fonts, Lucide Icons, Heroicons.
+
+Security
+
+reCAPTCHA, hCaptcha, Cloudflare Turnstile, CSP, HSTS, CORS, Sucuri, Wordfence, ModSecurity.
+
+Databases
+
+MySQL, PostgreSQL, MongoDB, Redis, Elasticsearch, Firebase, Supabase, SQLite, Prisma.
+
+DevOps and CI/CD
+
+Docker, Kubernetes, GitHub Actions, CircleCI, Travis CI, Jenkins, Sentry, Datadog, New Relic.
+
+Features and Standards
+
+Schema.org, Open Graph, Twitter Cards, PWA, GraphQL, REST API, Lazy Loading, Preload, Microdata, RSS Feed, Sitemap, Robots.txt, Meta Viewport, CSS Custom Properties, HTTP/2, HTTP/3.
+
+<br>
+
+Smart detection features
+
+The tool doesn't just match technology names. It does a lot more under the hood.
+
+Version extraction. When it detects a library or framework, it tries to figure out which version is running. It extracts version numbers from script filenames, URL patterns, meta tags, and HTTP headers.
+
+Confidence scoring. Every detection gets a confidence rating: high, medium, or low. High confidence means the tool found multiple strong signals. Low confidence means only a weak pattern matched. The report shows this visually so you know which results are reliable.
+
+WordPress plugin and theme extraction. For WordPress sites, the tool scans the HTML for references to active plugins and themes, listing them all out in the report with expandable details.
+
+Cookie analysis. The tool examines cookies set by the site and uses them to identify backend technologies. A PHPSESSID cookie suggests PHP. A csrftoken cookie suggests Django. An ASP.NET SessionId cookie suggests .NET. And so on.
+
+Performance metrics. The report includes page size, response time, compression method, and counts of scripts, stylesheets, and images.
+
+Social media meta detection. It extracts Open Graph tags and Twitter Card metadata so you can see how the site appears when shared on social platforms.
+
+Script analysis. The tool counts inline versus external scripts, identifies ES modules, and notes which scripts are loaded with async or defer.
+
+Link analysis. It categorizes links as internal or external and discovers any API endpoints referenced in anchor tags.
+
+<br>
+
+What the report looks like
+
+The generated HTML report is designed to feel like a modern dashboard, not a boring document. It uses a dark theme inspired by shadcn/ui with glassmorphism cards, gradient accents, and subtle animated background orbs that add depth without being distracting.
+
+Every page includes a sticky header with the tool name and version badge. Below that, a hero card shows the website name, URL, and HTTP status code with a green dot if everything is healthy.
+
+A stats dashboard at the top shows four key numbers: how many technologies were detected, how many categories they span, the HTTP status code, and how many data sources contributed to the analysis.
+
+There is an interactive search bar that filters technologies in real time as you type. It comes with suggestion chips for common technologies like React, WordPress, Cloudflare, and Shopify.
+
+All detected technologies appear as color-coded pills in a badge grid at the top of the report, then get detailed sections below organized by category. Each technology row shows its name, detected version if available, confidence indicator with three visual bars, and a confidence label with a colored dot.
+
+For WordPress sites, each detected plugin or theme shows a toggle button that expands to reveal the full list of items found.
+
+JSON-LD structured data appears in an accordion. You can click each item to expand and view the full JSON payload.
+
+The report is fully responsive and works on phones, tablets, and desktops.
+
+<br>
+
+Project structure
+
+<pre>
+web-tech-detector/
+  README.md
+  LICENSE
+  requirements.txt
+  setup.py
+  web_tech_detector/
+    __init__.py       Package exports and version info
+    __main__.py       Entry point for python -m
+    cli.py            Command line interface
+    detector.py       Detection patterns and logic
+    report.py         HTML report generator
+    scraper.py        Web scraping and HTTP
+  examples/
+    sample_usage.py   Library usage examples
+    output/           Generated reports land here
+</pre>
+
+<br>
 
 Contributing
-------------
 
-Contributions are welcome. To contribute:
+This project is open source and contributions are welcome. If you want to add detection patterns for a technology that is missing, improve version extraction accuracy, add alternative report themes, write unit tests, or set up an API endpoint for web service deployment, go ahead and open a pull request.
 
-1. Fork the repository
-2. Create a feature branch (git checkout -b feature/amazing-feature)
-3. Commit your changes (git commit -m "Add amazing feature")
-4. Push to the branch (git push origin feature/amazing-feature)
-5. Open a Pull Request
+The codebase is small and easy to navigate. The detection patterns live in a single dictionary in detector.py. Adding a new technology means adding a few regex patterns to the right category. The report template is in report.py with inline CSS and JavaScript, so changes to the design are self-contained.
 
+If you find a bug or have an idea for a new feature, open an issue first so we can discuss it before you write code.
 
-Ideas for Contributions
-^^^^^^^^^^^^^^^^^^^^^^^
-
-- Add more technology detection patterns
-- Create alternative report themes
-- Add unit tests
-- Add API endpoint support
-- Improve detection accuracy
-
+<br>
 
 License
--------
 
-This project is licensed under the MIT License. See the LICENSE file for details.
+This project is licensed under the MIT License. You can use it, modify it, and distribute it freely. See the LICENSE file for the full text.
 
+<br>
 
-Acknowledgments
----------------
+Built with
 
-- BeautifulSoup - HTML parsing library
-- Requests - HTTP library for Python
-- shadcn/ui - Design inspiration for the reports
+BeautifulSoup for HTML parsing. Requests for HTTP. shadcn/ui for design inspiration. Inter and JetBrains Mono for typography.
