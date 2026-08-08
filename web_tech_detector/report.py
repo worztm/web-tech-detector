@@ -389,7 +389,7 @@ class ReportGenerator:
         for tech in sorted(all_techs, key=lambda x: (0 if x["confidence"] == "high" else 1 if x["confidence"] == "medium" else 2, x["name"])):
             version_str = f" <span class='tech-version'>{tech['version']}</span>" if tech.get("version") else ""
             badges += f"""
-                <span class="tech-pill" data-tech="{self._escape(tech['name'].lower())}" data-category="{self._escape(tech['category'].lower())}" data-confidence="{tech['confidence']}" onclick="filterByTech('{self._escape(tech['name'])}')">
+                <span class="tech-pill" data-tech="{self._escape(tech['name'].lower())}" data-category="{self._escape(tech['category'].lower())}" data-confidence="{tech['confidence']}" onclick="filterByTech(this.dataset.tech)">
                     <span class="tech-pill-indicator confidence-{tech['confidence']}"></span>
                     <span class="tech-pill-name">{self._escape(tech['name'])}{version_str}</span>
                     <span class="tech-pill-confidence">{tech['confidence']}</span>
