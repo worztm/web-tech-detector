@@ -319,17 +319,17 @@ class ReportGenerator:
     def _build_stats_section(self, total_count: int, total_categories: int, status_code: int, json_ld_count: int) -> str:
         """Build the statistics cards section with glassmorphism."""
         stats = [
-            {"label": "Technologies", "value": str(total_count), "icon": "🔬", "gradient": "from-[#3b82f6] to-[#8b5cf6]"},
-            {"label": "Categories", "value": str(total_categories), "icon": "📂", "gradient": "from-[#10b981] to-[#06b6d4]"},
-            {"label": "Status Code", "value": str(status_code), "icon": "📡", "gradient": "from-[#f59e0b] to-[#ef4444]"},
-            {"label": "Data Sources", "value": str(json_ld_count + 1), "icon": "📋", "gradient": "from-[#ec4899] to-[#8b5cf6]"},
+            {"label": "Technologies", "value": str(total_count), "icon": "🔬", "gradient": "#3b82f6, #8b5cf6"},
+            {"label": "Categories", "value": str(total_categories), "icon": "📂", "gradient": "#10b981, #06b6d4"},
+            {"label": "Status Code", "value": str(status_code), "icon": "📡", "gradient": "#f59e0b, #ef4444"},
+            {"label": "Data Sources", "value": str(json_ld_count + 1), "icon": "📋", "gradient": "#ec4899, #8b5cf6"},
         ]
 
         cards = ""
         for stat in stats:
             cards += f"""
             <div class="stat-card glass card-hover" data-stat="{stat['label'].lower().replace(' ', '-')}">
-                <div class="stat-icon-wrap" style="background: linear-gradient(135deg, {stat['gradient'].replace('from-[', '').replace(']', '').replace('to-[', '').replace(']', '')});">
+                <div class="stat-icon-wrap" style="background: linear-gradient(135deg, {stat['gradient']});">
                     <span>{stat['icon']}</span>
                 </div>
                 <div class="stat-info">
