@@ -23,7 +23,7 @@ Installation
 Clone the repo and install the dependencies.
 
 <pre>
-git clone https://github.com/waleedmasud/web-tech-detector.git
+git clone https://github.com/worztm/web-tech-detector.git
 cd web-tech-detector
 pip install -r requirements.txt
 </pre>
