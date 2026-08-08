@@ -18,7 +18,7 @@ setup(
     description="A tool to detect technologies used by websites and generate beautiful HTML reports",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/waleedmasud/web-tech-detector",
+    url="https://github.com/worztm/web-tech-detector",
     packages=find_packages(),
     classifiers=[
         "Development Status :: 4 - Beta",
