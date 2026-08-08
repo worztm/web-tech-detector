@@ -420,7 +420,7 @@ TECHNOLOGY_PATTERNS: Dict[str, Dict[str, dict]] = {
             "category": "E-commerce",
         },
         "Stripe": {
-            "patterns": [r"stripe\.com", r"stripe-", r"Stripe\.js", r"pk_"],
+            "patterns": [r"stripe\.com", r"stripe-", r"Stripe\.js", r"pk_(?:live|test)_"],
             "category": "E-commerce",
         },
         "Snipcart": {
