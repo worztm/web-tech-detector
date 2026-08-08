@@ -154,7 +154,7 @@ class WebScraper:
         self.robots_url = robots_url
 
         try:
-            resp = requests.get(robots_url, timeout=5, headers=self.DEFAULT_HEADERS)
+            resp = requests.get(robots_url, timeout=5, headers=self.DEFAULT_HEADERS, verify=self.verify_ssl)
             if resp.status_code == 200:
                 return resp.text[:2000]  # Return first 2000 chars
         except requests.exceptions.RequestException:
@@ -168,7 +168,7 @@ class WebScraper:
         self.sitemap_url = sitemap_url
 
         try:
-            resp = requests.get(sitemap_url, timeout=5, headers=self.DEFAULT_HEADERS)
+            resp = requests.get(sitemap_url, timeout=5, headers=self.DEFAULT_HEADERS, verify=self.verify_ssl)
             if resp.status_code == 200:
                 return resp.text[:2000]
         except requests.exceptions.RequestException:
