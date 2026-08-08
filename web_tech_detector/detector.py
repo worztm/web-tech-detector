@@ -1312,7 +1312,7 @@ class TechnologyDetector:
         metrics["response_time_ms"] = round(elapsed * 1000, 2)
 
         # Compression
-        content_encoding = http_headers.get("Content-Encoding", "")
+        content_encoding = http_headers.get("content-encoding", "")
         metrics["compression"] = content_encoding if content_encoding else "None"
 
         # Script count
