@@ -975,11 +975,11 @@ TECHNOLOGY_PATTERNS: Dict[str, Dict[str, dict]] = {
             "category": "Features & Standards",
         },
         "HTTP/2": {
-            "patterns": [r"http2", r"h2"],
+            "patterns": [r"http2", r"http/2", r"h2-\d+"],
             "category": "Features & Standards",
         },
         "HTTP/3": {
-            "patterns": [r"http3", r"h3", r"alt-svc"],
+            "patterns": [r"http3", r"http/3", r"alt-svc"],
             "category": "Features & Standards",
         },
     },
