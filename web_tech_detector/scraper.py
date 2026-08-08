@@ -189,14 +189,13 @@ class WebScraper:
         """Extract all internal links from the page."""
         links = []
         base = self.get_base_url()
-        domain = self.get_domain()
 
         for a in self.soup.find_all("a", href=True) if self.soup else []:
             href = a["href"]
-            if href.startswith("/") or href.startswith(base) or domain in href:
-                full_url = urljoin(base, href)
-                if full_url.startswith(base):
-                    links.append(full_url)
+            full_url = urljoin(base, href)
+            # Only keep links that live on the same host (proper domain boundary check)
+            if urlparse(full_url).netloc == urlparse(base).netloc:
+                links.append(full_url)
 
         return list(set(links))
 
