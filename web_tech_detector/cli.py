@@ -113,7 +113,7 @@ def analyze_url(
 
     # Script & Link analysis
     script_analysis = detector.detect_script_analysis(scraper.soup)
-    link_analysis = detector.detect_links_analysis(scraper.soup)
+    link_analysis = detector.detect_links_analysis(scraper.soup, domain=scraper.get_domain())
 
     # Cookie analysis
     cookie_findings = detector.analyze_cookies(scraper.cookies)
