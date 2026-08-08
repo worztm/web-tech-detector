@@ -758,7 +758,7 @@ TECHNOLOGY_PATTERNS: Dict[str, Dict[str, dict]] = {
             "category": "UI Libraries & Components",
         },
         "Framer Motion": {
-            "patterns": [r"framer-motion", r"framer\.com/motion", r"motion"],
+            "patterns": [r"framer-motion", r"framer\.com/motion"],
             "version_patterns": [r"framer-motion@([\d\.]+)"],
             "category": "UI Libraries & Components",
         },
