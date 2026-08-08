@@ -1391,8 +1391,13 @@ class TechnologyDetector:
 
         return social
 
-    def detect_links_analysis(self, soup: BeautifulSoup) -> Dict:
-        """Analyze links for technology hints."""
+    def detect_links_analysis(self, soup: BeautifulSoup, domain: Optional[str] = None) -> Dict:
+        """Analyze links for technology hints.
+
+        Args:
+            soup: Parsed BeautifulSoup object
+            domain: The site's own domain used to classify links as internal/external
+        """
         analysis = {
             "internal_links": 0,
             "external_links": 0,
@@ -1401,26 +1406,26 @@ class TechnologyDetector:
             "api_endpoints": [],
         }
 
-        domain = None
-
         for a in soup.find_all("a", href=True):
             href = a["href"]
-            if not domain:
-                from urllib.parse import urlparse
-                parsed = urlparse(href)
-                if parsed.netloc:
-                    domain = parsed.netloc
+            parsed = urlparse(href)
+            link_domain = parsed.netloc
 
             if href.startswith("mailto:"):
                 analysis["has_mailto"] = True
             elif href.startswith("tel:"):
                 analysis["has_tel"] = True
-            elif "/api/" in href or href.endswith("/api"):
+            elif "api" in parsed.path.split("/"):
                 analysis["api_endpoints"].append(href)
-            elif domain and domain in href:
+            elif domain and link_domain:
+                # Internal = same domain or a subdomain of it; otherwise external
+                if link_domain == domain or link_domain.endswith("." + domain):
+                    analysis["internal_links"] += 1
+                else:
+                    analysis["external_links"] += 1
+            elif not link_domain:
+                # Relative links belong to the same site
                 analysis["internal_links"] += 1
-            elif href.startswith("http") and domain and domain not in href:
-                analysis["external_links"] += 1
 
         analysis["api_endpoints"] = list(set(analysis["api_endpoints"]))[:5]
 
