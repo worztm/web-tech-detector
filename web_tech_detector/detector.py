@@ -1269,17 +1269,17 @@ class TechnologyDetector:
         server_info = {}
 
         header_mapping = {
-            "Server": "Server",
-            "X-Powered-By": "Powered By",
-            "X-AspNet-Version": "ASP.NET Version",
-            "X-Frame-Options": "X-Frame-Options",
-            "X-Content-Type-Options": "X-Content-Type-Options",
-            "X-XSS-Protection": "X-XSS-Protection",
-            "Referrer-Policy": "Referrer Policy",
-            "Permissions-Policy": "Permissions Policy",
-            "Content-Security-Policy": "Content Security Policy",
-            "Cache-Control": "Cache Control",
-            "Content-Type": "Content Type",
+            "server": "Server",
+            "x-powered-by": "Powered By",
+            "x-aspnet-version": "ASP.NET Version",
+            "x-frame-options": "X-Frame-Options",
+            "x-content-type-options": "X-Content-Type-Options",
+            "x-xss-protection": "X-XSS-Protection",
+            "referrer-policy": "Referrer Policy",
+            "permissions-policy": "Permissions Policy",
+            "content-security-policy": "Content Security Policy",
+            "cache-control": "Cache Control",
+            "content-type": "Content Type",
         }
 
         for header, label in header_mapping.items():
@@ -1290,7 +1290,7 @@ class TechnologyDetector:
                 server_info[label] = value
 
         # Detect CDN
-        if "CF-RAY" in http_headers or "cf-ray" in http_headers:
+        if "cf-ray" in http_headers:
             server_info["CDN"] = "Cloudflare"
         if "x-amz-cf-id" in http_headers:
             server_info["CDN"] = "CloudFront"
