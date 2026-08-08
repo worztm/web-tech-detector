@@ -985,7 +985,7 @@ TECHNOLOGY_PATTERNS: Dict[str, Dict[str, dict]] = {
     },
     "Databases": {
         "MySQL": {
-            "patterns": [r"mysql", r"SQL"],
+            "patterns": [r"mysql", r"mysqli"],
             "category": "Databases",
         },
         "PostgreSQL": {
