@@ -286,9 +286,9 @@ Examples:
         help="Skip social media meta tag detection",
     )
     parser.add_argument(
-        "--list-versions",
+        "--version",
         action="version",
-        version="%(prog)s 1.0.0",
+        version="%(prog)s " + version_str,
         help="Show program version",
     )
 
