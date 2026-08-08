@@ -143,7 +143,8 @@ class WebScraper:
             return
         self.html = self.response.text
         self.soup = BeautifulSoup(self.html, "html.parser")
-        self.http_headers = dict(self.response.headers)
+        # Normalize header keys to lowercase so lookups are case-insensitive
+        self.http_headers = {k.lower(): v for k, v in self.response.headers.items()}
         self.cookies = dict(self.response.cookies)
 
     def check_robots_txt(self) -> Optional[str]:
