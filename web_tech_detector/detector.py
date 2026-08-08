@@ -626,7 +626,7 @@ TECHNOLOGY_PATTERNS: Dict[str, Dict[str, dict]] = {
             "category": "Programming Languages & Runtimes",
         },
         "Rust": {
-            "patterns": [r"rust"],
+            "patterns": [r"\brust\b"],
             "category": "Programming Languages & Runtimes",
         },
         "Django": {
