@@ -70,7 +70,7 @@ def analyze_url(
         Path to the generated report file
     """
     # Set output directory
-    if output_dir is None:
+    if not output_dir:
         output_dir = os.getcwd()
 
     # Ensure output directory exists

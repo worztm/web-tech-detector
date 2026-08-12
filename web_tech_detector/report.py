@@ -113,6 +113,7 @@ class ReportGenerator:
         """
         html_content = self.generate()
 
+        output_path = output_path or os.curdir
         os.makedirs(output_path, exist_ok=True)
 
         # Generate a filesystem-safe filename. Include microseconds to avoid

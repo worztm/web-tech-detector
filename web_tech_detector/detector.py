@@ -1425,18 +1425,25 @@ class TechnologyDetector:
         normalized_domain = (domain or "").lower().split(":", 1)[0]
 
         for a in soup.find_all("a", href=True):
-            href = a["href"]
+            href = str(a["href"]).strip()
             parsed = urlparse(href)
             link_domain = parsed.netloc.lower().split(":", 1)[0]
             path_parts = [part.lower() for part in parsed.path.split("/") if part]
 
-            if href.startswith("mailto:"):
+            href_lower = href.lower()
+            if href_lower.startswith("mailto:"):
                 analysis["has_mailto"] = True
-            elif href.startswith("tel:"):
+            elif href_lower.startswith("tel:"):
                 analysis["has_tel"] = True
-            elif any(part == "api" or part.startswith("api-") for part in path_parts):
+            elif parsed.scheme in {"http", "https", ""} and any(
+                part == "api" or part.startswith("api-") for part in path_parts
+            ):
                 analysis["api_endpoints"].append(href)
-            elif domain and link_domain:
+
+            if parsed.scheme not in {"http", "https", ""}:
+                continue
+
+            if domain and link_domain:
                 # Internal = same domain or a subdomain of it; otherwise external
                 if link_domain == normalized_domain or link_domain.endswith("." + normalized_domain):
                     analysis["internal_links"] += 1
@@ -1446,7 +1453,7 @@ class TechnologyDetector:
                 # Relative links belong to the same site
                 analysis["internal_links"] += 1
 
-        analysis["api_endpoints"] = list(set(analysis["api_endpoints"]))[:5]
+        analysis["api_endpoints"] = list(dict.fromkeys(analysis["api_endpoints"]))[:5]
 
         return analysis
 

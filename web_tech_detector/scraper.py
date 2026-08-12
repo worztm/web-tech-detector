@@ -90,6 +90,13 @@ class WebScraper:
             True if successful, False otherwise.
         """
         start_time = time.time()
+        self.response = None
+        self.soup = None
+        self.html = ""
+        self.http_headers = {}
+        self.cookies = {}
+        self.elapsed_time = 0.0
+        self.redirect_chain = []
 
         try:
             self.response = self.session.get(
@@ -147,7 +154,7 @@ class WebScraper:
 
     def check_robots_txt(self) -> Optional[str]:
         """Check if robots.txt exists and return content summary."""
-        parsed = urlparse(self.url)
+        parsed = urlparse(self.final_url)
         robots_url = f"{parsed.scheme}://{parsed.netloc}/robots.txt"
         self.robots_url = robots_url
 
@@ -161,7 +168,7 @@ class WebScraper:
 
     def check_sitemap(self) -> Optional[str]:
         """Check if sitemap.xml exists."""
-        parsed = urlparse(self.url)
+        parsed = urlparse(self.final_url)
         sitemap_url = f"{parsed.scheme}://{parsed.netloc}/sitemap.xml"
         self.sitemap_url = sitemap_url
 
@@ -175,27 +182,30 @@ class WebScraper:
 
     def get_domain(self) -> str:
         """Extract the domain from the URL."""
-        parsed = urlparse(self.url)
+        parsed = urlparse(self.final_url)
         return parsed.netloc
 
     def get_base_url(self) -> str:
         """Get the base URL of the page."""
-        parsed = urlparse(self.url)
+        parsed = urlparse(self.final_url)
         return f"{parsed.scheme}://{parsed.netloc}"
 
     def get_all_links(self) -> List[str]:
         """Extract all internal links from the page."""
         links = []
-        base = self.get_base_url()
+        base = self.final_url
+        page_host = (urlparse(base).hostname or "").lower()
 
         for a in self.soup.find_all("a", href=True) if self.soup else []:
-            href = a["href"]
+            href = str(a["href"]).strip()
             full_url = urljoin(base, href)
-            # Only keep links that live on the same host (proper domain boundary check)
-            if urlparse(full_url).netloc == urlparse(base).netloc:
+            # Only keep links that live on the same host. Ignore non-HTTP links
+            # such as mailto:, tel:, and javascript:.
+            parsed_url = urlparse(full_url)
+            if parsed_url.scheme in {"http", "https"} and (parsed_url.hostname or "").lower() == page_host:
                 links.append(full_url)
 
-        return list(set(links))
+        return list(dict.fromkeys(links))
 
     def get_resource_urls(self) -> Dict[str, List[str]]:
         """Extract normalized URLs of resources referenced by the page."""
