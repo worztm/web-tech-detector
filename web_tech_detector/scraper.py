@@ -8,7 +8,7 @@ import time
 import re
 from bs4 import BeautifulSoup
 from urllib.parse import urlparse, urljoin
-from typing import Optional, Dict, List, Tuple
+from typing import Optional, Dict, List, Tuple, Mapping
 
 
 class WebScraper:
@@ -28,8 +28,9 @@ class WebScraper:
         "Upgrade-Insecure-Requests": "1",
     }
 
-    def __init__(self, url: str, timeout: int = 30, verify_ssl: bool = True, 
-                 follow_redirects: bool = True):
+    def __init__(self, url: str, timeout: int = 30, verify_ssl: bool = True,
+                 follow_redirects: bool = True,
+                 headers: Optional[Mapping[str, str]] = None):
         """
         Initialize the scraper.
 
@@ -38,11 +39,18 @@ class WebScraper:
             timeout: Request timeout in seconds
             verify_ssl: Whether to verify SSL certificates
             follow_redirects: Whether to follow redirects
+            headers: Additional request headers. These override defaults by name.
         """
         self.url = self._normalize_url(url)
+        if timeout <= 0:
+            raise ValueError("timeout must be greater than zero")
         self.timeout = timeout
         self.verify_ssl = verify_ssl
         self.follow_redirects = follow_redirects
+        self.headers = dict(self.DEFAULT_HEADERS)
+        if headers:
+            self.headers.update({str(key): str(value) for key, value in headers.items()})
+        self.session = requests.Session()
         self.response: Optional[requests.Response] = None
         self.soup: Optional[BeautifulSoup] = None
         self.html: str = ""
@@ -55,11 +63,24 @@ class WebScraper:
 
     @staticmethod
     def _normalize_url(url: str) -> str:
-        """Ensure URL has a scheme (https://)."""
-        url = url.strip()
-        if not url.startswith(("http://", "https://")):
-            return f"https://{url}"
-        return url
+        """Normalize and validate an HTTP(S) URL."""
+        if not isinstance(url, str) or not url.strip():
+            raise ValueError("url must be a non-empty string")
+
+        value = url.strip()
+        if not re.match(r"^https?://", value, re.IGNORECASE):
+            value = f"https://{value}"
+
+        parsed = urlparse(value)
+        if parsed.scheme.lower() not in {"http", "https"} or not parsed.netloc:
+            raise ValueError("url must contain a valid http:// or https:// host")
+        if parsed.username or parsed.password:
+            raise ValueError("URLs with embedded credentials are not supported")
+        try:
+            parsed.port
+        except ValueError as exc:
+            raise ValueError("url contains an invalid port") from exc
+        return parsed._replace(scheme=parsed.scheme.lower()).geturl()
 
     def fetch(self) -> bool:
         """
@@ -71,10 +92,9 @@ class WebScraper:
         start_time = time.time()
 
         try:
-            session = requests.Session()
-            self.response = session.get(
+            self.response = self.session.get(
                 self.url,
-                headers=self.DEFAULT_HEADERS,
+                headers=self.headers,
                 timeout=self.timeout,
                 allow_redirects=self.follow_redirects,
                 verify=self.verify_ssl,
@@ -90,10 +110,6 @@ class WebScraper:
 
             return True
 
-        except requests.exceptions.SSLError:
-            # Retry without SSL verification
-            return self._retry_without_ssl(start_time)
-
         except requests.exceptions.TooManyRedirects:
             # Retry without following redirects
             return self._retry_no_redirects(start_time)
@@ -102,30 +118,12 @@ class WebScraper:
             print(f"  ⚠️  Error fetching URL: {e}")
             return False
 
-    def _retry_without_ssl(self, start_time: float) -> bool:
-        """Retry the request with SSL verification disabled."""
-        try:
-            self.response = requests.get(
-                self.url,
-                headers=self.DEFAULT_HEADERS,
-                timeout=self.timeout,
-                allow_redirects=self.follow_redirects,
-                verify=False,
-            )
-            self.elapsed_time = time.time() - start_time
-            self.response.raise_for_status()
-            self._parse_response()
-            return True
-        except requests.exceptions.RequestException as e:
-            print(f"  ⚠️  Error fetching URL (SSL disabled): {e}")
-            return False
-
     def _retry_no_redirects(self, start_time: float) -> bool:
         """Retry without following redirects."""
         try:
-            self.response = requests.get(
+            self.response = self.session.get(
                 self.url,
-                headers=self.DEFAULT_HEADERS,
+                headers=self.headers,
                 timeout=self.timeout,
                 allow_redirects=False,
                 verify=self.verify_ssl,
@@ -154,7 +152,7 @@ class WebScraper:
         self.robots_url = robots_url
 
         try:
-            resp = requests.get(robots_url, timeout=5, headers=self.DEFAULT_HEADERS, verify=self.verify_ssl)
+            resp = self.session.get(robots_url, timeout=5, headers=self.headers, verify=self.verify_ssl)
             if resp.status_code == 200:
                 return resp.text[:2000]  # Return first 2000 chars
         except requests.exceptions.RequestException:
@@ -168,7 +166,7 @@ class WebScraper:
         self.sitemap_url = sitemap_url
 
         try:
-            resp = requests.get(sitemap_url, timeout=5, headers=self.DEFAULT_HEADERS, verify=self.verify_ssl)
+            resp = self.session.get(sitemap_url, timeout=5, headers=self.headers, verify=self.verify_ssl)
             if resp.status_code == 200:
                 return resp.text[:2000]
         except requests.exceptions.RequestException:
@@ -200,7 +198,7 @@ class WebScraper:
         return list(set(links))
 
     def get_resource_urls(self) -> Dict[str, List[str]]:
-        """Extract URLs of external resources."""
+        """Extract normalized URLs of resources referenced by the page."""
         resources = {
             "scripts": [],
             "stylesheets": [],
@@ -213,23 +211,31 @@ class WebScraper:
             return resources
 
         for script in self.soup.find_all("script", src=True):
-            resources["scripts"].append(script["src"])
+            resources["scripts"].append(urljoin(self.final_url, script["src"]))
 
         for link in self.soup.find_all("link", rel="stylesheet", href=True):
-            resources["stylesheets"].append(link["href"])
+            resources["stylesheets"].append(urljoin(self.final_url, link["href"]))
 
         for img in self.soup.find_all("img", src=True):
-            resources["images"].append(img["src"])
+            resources["images"].append(urljoin(self.final_url, img["src"]))
 
         for iframe in self.soup.find_all("iframe", src=True):
-            resources["iframes"].append(iframe["src"])
+            resources["iframes"].append(urljoin(self.final_url, iframe["src"]))
+
+        for link in self.soup.find_all("link", href=True):
+            rel = {str(value).lower() for value in (link.get("rel") or [])}
+            if "preload" in rel and str(link.get("as", "")).lower() == "font":
+                resources["fonts"].append(urljoin(self.final_url, link["href"]))
+
+        for resource_type, urls in resources.items():
+            resources[resource_type] = list(dict.fromkeys(urls))
 
         return resources
 
     @property
     def is_success(self) -> bool:
         """Check if the last request was successful."""
-        return self.response is not None and self.response.status_code == 200
+        return self.response is not None and 200 <= self.response.status_code < 300
 
     @property
     def status_code(self) -> Optional[int]:

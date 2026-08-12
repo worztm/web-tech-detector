@@ -7,6 +7,7 @@ search/filter, accordion for JSON-LD, performance metrics, and responsive design
 import os
 import json
 import html as html_module
+import re
 from datetime import datetime
 from typing import Dict, List, Optional, Any
 from string import Template
@@ -99,21 +100,25 @@ class ReportGenerator:
             sitemap=self.results.get("sitemap"),
         )
 
-    def save(self, output_path: str) -> str:
+    def save(self, output_path: str, save_json: bool = True) -> str:
         """
         Generate and save the HTML report.
 
         Args:
             output_path: Directory to save the report
+            save_json: Also save a sanitized JSON copy alongside the report.
 
         Returns:
             Full path to the saved file
         """
         html_content = self.generate()
 
-        # Generate filename
-        safe_domain = self.domain.replace(".", "_").replace(":", "_")
-        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        os.makedirs(output_path, exist_ok=True)
+
+        # Generate a filesystem-safe filename. Include microseconds to avoid
+        # overwriting reports created by rapid successive scans.
+        safe_domain = re.sub(r"[^A-Za-z0-9_-]+", "_", self.domain).strip("_") or "unknown"
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S_%f")
         filename = f"tech_report_{safe_domain}_{timestamp}.html"
 
         full_path = os.path.join(output_path, filename)
@@ -121,15 +126,12 @@ class ReportGenerator:
         with open(full_path, "w", encoding="utf-8") as f:
             f.write(html_content)
 
-        # Also save JSON data alongside
-        json_path = full_path.replace(".html", ".json")
-        try:
+        if save_json:
+            json_path = os.path.splitext(full_path)[0] + ".json"
             # Clean results for JSON export (remove non-serializable)
             json_results = self._sanitize_for_json(self.results)
             with open(json_path, "w", encoding="utf-8") as f:
-                json.dump(json_results, f, indent=2, default=str)
-        except Exception:
-            pass
+                json.dump(json_results, f, indent=2, ensure_ascii=False, default=str)
 
         return full_path
 

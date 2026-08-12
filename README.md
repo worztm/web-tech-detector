@@ -56,6 +56,13 @@ The tool will open the report in your default browser automatically. If you pref
 tech-detector https://shopify.com --no-open
 </pre>
 
+Custom headers can be repeated for authenticated staging sites or content
+negotiation.
+
+<pre>
+tech-detector https://example.com --header "Accept-Language: fr-FR" --header "X-Scan: local" --no-open
+</pre>
+
 <br>
 
 All command line options
@@ -92,6 +99,9 @@ Options:
                             report.
 
   --no-social               Skip social media meta tag detection.
+
+  --header "NAME: VALUE"    Add or override an HTTP request header. Repeat the
+                            option to send multiple custom headers.
 </pre>
 
 <br>
@@ -99,6 +109,10 @@ Options:
 Using it as a Python library
 
 You can import the tool into your own Python projects and use it programmatically.
+
+CLI JSON export is opt-in with `--json`. Library users can choose whether to
+write the companion JSON file with `ReportGenerator.save(output_dir,
+save_json=False)`.
 
 The simplest way.
 

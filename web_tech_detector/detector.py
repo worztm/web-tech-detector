@@ -1215,6 +1215,9 @@ class TechnologyDetector:
         """Extract technology hints from meta tags."""
         meta_info = {}
 
+        if not soup:
+            return meta_info
+
         # Generator meta tag
         generator = soup.find("meta", attrs={"name": "generator"})
         if generator and generator.get("content"):
@@ -1255,10 +1258,17 @@ class TechnologyDetector:
         """Extract JSON-LD structured data."""
         json_ld_data = []
 
+        if not soup:
+            return json_ld_data
+
         for script in soup.find_all("script", type="application/ld+json"):
             try:
-                data = json.loads(script.string)
-                json_ld_data.append(data)
+                raw_data = script.string or script.get_text()
+                data = json.loads(raw_data)
+                if isinstance(data, list):
+                    json_ld_data.extend(item for item in data if isinstance(item, dict))
+                elif isinstance(data, dict):
+                    json_ld_data.append(data)
             except (json.JSONDecodeError, TypeError):
                 pass
 
@@ -1369,11 +1379,14 @@ class TechnologyDetector:
         """Detect social media meta tags."""
         social = {}
 
+        if not soup:
+            return social
+
         # Open Graph
         og_tags = {}
         for meta in soup.find_all("meta"):
             prop = meta.get("property", "") or meta.get("name", "")
-            if prop.startswith("og:"):
+            if str(prop).lower().startswith("og:"):
                 og_tags[prop] = meta.get("content", "")
 
         if og_tags:
@@ -1383,7 +1396,7 @@ class TechnologyDetector:
         twitter_tags = {}
         for meta in soup.find_all("meta"):
             name = meta.get("name", "")
-            if name.startswith("twitter:"):
+            if str(name).lower().startswith("twitter:"):
                 twitter_tags[name] = meta.get("content", "")
 
         if twitter_tags:
@@ -1406,20 +1419,26 @@ class TechnologyDetector:
             "api_endpoints": [],
         }
 
+        if not soup:
+            return analysis
+
+        normalized_domain = (domain or "").lower().split(":", 1)[0]
+
         for a in soup.find_all("a", href=True):
             href = a["href"]
             parsed = urlparse(href)
-            link_domain = parsed.netloc
+            link_domain = parsed.netloc.lower().split(":", 1)[0]
+            path_parts = [part.lower() for part in parsed.path.split("/") if part]
 
             if href.startswith("mailto:"):
                 analysis["has_mailto"] = True
             elif href.startswith("tel:"):
                 analysis["has_tel"] = True
-            elif "api" in parsed.path.split("/"):
+            elif any(part == "api" or part.startswith("api-") for part in path_parts):
                 analysis["api_endpoints"].append(href)
             elif domain and link_domain:
                 # Internal = same domain or a subdomain of it; otherwise external
-                if link_domain == domain or link_domain.endswith("." + domain):
+                if link_domain == normalized_domain or link_domain.endswith("." + normalized_domain):
                     analysis["internal_links"] += 1
                 else:
                     analysis["external_links"] += 1
@@ -1443,11 +1462,15 @@ class TechnologyDetector:
             "type_module": 0,
         }
 
+        if not soup:
+            return analysis
+
         for script in soup.find_all("script"):
             analysis["total_scripts"] += 1
             if script.get("src"):
                 analysis["external_scripts"] += 1
-                if script.get("type") == "module":
+                if str(script.get("type", "")).lower() == "module":
+                    analysis["module_scripts"] += 1
                     analysis["type_module"] += 1
             else:
                 analysis["inline_scripts"] += 1

@@ -12,6 +12,7 @@ import argparse
 import time
 from datetime import datetime
 from urllib.parse import urlparse
+from typing import Dict, Iterable, Optional
 
 # Fix encoding for Windows console (guard for environments without a buffer)
 if hasattr(sys.stdout, "buffer"):
@@ -22,6 +23,18 @@ if hasattr(sys.stderr, "buffer"):
 from .scraper import WebScraper
 from .detector import TechnologyDetector
 from .report import ReportGenerator
+from . import __version__
+
+
+def _parse_headers(values: Optional[Iterable[str]]) -> Dict[str, str]:
+    """Parse repeatable ``--header Name: value`` arguments."""
+    headers: Dict[str, str] = {}
+    for value in values or []:
+        name, separator, header_value = value.partition(":")
+        if not separator or not name.strip() or not header_value.strip():
+            raise ValueError(f"Invalid header {value!r}; use --header 'Name: value'")
+        headers[name.strip()] = header_value.strip()
+    return headers
 
 
 def analyze_url(
@@ -35,6 +48,7 @@ def analyze_url(
     check_robots: bool = False,
     check_sitemap: bool = False,
     detect_social: bool = True,
+    headers: Optional[Dict[str, str]] = None,
 ) -> str:
     """
     Analyze a URL and generate a comprehensive technology report.
@@ -50,6 +64,7 @@ def analyze_url(
         check_robots: Check robots.txt
         check_sitemap: Check sitemap.xml
         detect_social: Extract social media meta tags
+        headers: Additional HTTP request headers
 
     Returns:
         Path to the generated report file
@@ -67,13 +82,14 @@ def analyze_url(
         timeout=timeout,
         verify_ssl=True,
         follow_redirects=follow_redirects,
+        headers=headers,
     )
     detector = TechnologyDetector()
 
     # Print header
     if verbose:
         print(f"\n{'='*60}")
-        print(f"  🔍 Web Technology Detector v1.0.0")
+        print(f"  🔍 Web Technology Detector v{__version__}")
         print(f"  Analyzing: {scraper.url}")
         print(f"{'='*60}")
     else:
@@ -85,7 +101,7 @@ def analyze_url(
     # Fetch the website
     if not scraper.fetch():
         print(f"  ❌ Failed to fetch the website. Please check the URL and try again.")
-        sys.exit(1)
+        raise RuntimeError("Failed to fetch the website. Please check the URL and try again.")
 
     fetch_time = time.time() - start_time
 
@@ -155,11 +171,11 @@ def analyze_url(
     # Generate report
     print(f"  📄 Generating HTML report...")
     generator = ReportGenerator(results)
-    report_path = generator.save(output_dir)
-
-    # Also save JSON if requested
+    # Export JSON only when requested. ReportGenerator keeps JSON enabled by
+    # default for direct library users, while the CLI flag remains opt-in.
+    report_path = generator.save(output_dir, save_json=json_output)
     if json_output:
-        json_path = report_path.replace(".html", ".json")
+        json_path = os.path.splitext(report_path)[0] + ".json"
         print(f"  📋 JSON data exported to: {json_path}")
 
     # Print summary
@@ -215,6 +231,7 @@ def _print_summary(results: dict, verbose: bool = False):
 
 def main():
     """Main entry point for CLI."""
+    version_str = f"v{__version__}"
     parser = argparse.ArgumentParser(
         description="🔍 Web Technology Detector — detect technologies used by any website",
         formatter_class=argparse.RawDescriptionHelpFormatter,
@@ -286,6 +303,13 @@ Examples:
         help="Skip social media meta tag detection",
     )
     parser.add_argument(
+        "--header",
+        action="append",
+        dest="headers",
+        metavar="NAME: VALUE",
+        help="Add or override an HTTP request header (repeatable)",
+    )
+    parser.add_argument(
         "--version",
         action="version",
         version="%(prog)s " + version_str,
@@ -295,7 +319,6 @@ Examples:
     args = parser.parse_args()
 
     # Print banner
-    version_str = "v1.0.0"
     print(f"\n  {'═' * 56}")
     print(f"  🔍  Web Technology Detector  {version_str}")
     print(f"  {'═' * 56}")
@@ -313,18 +336,23 @@ Examples:
         sys.exit(1)
 
     # Run analysis
-    analyze_url(
-        url=url,
-        output_dir=args.output,
-        auto_open=not args.no_open,
-        json_output=args.json_output,
-        verbose=args.verbose,
-        timeout=args.timeout,
-        follow_redirects=not args.no_redirect,
-        check_robots=args.check_robots,
-        check_sitemap=args.check_sitemap,
-        detect_social=not args.no_social,
-    )
+    try:
+        request_headers = _parse_headers(args.headers)
+        analyze_url(
+            url=url,
+            output_dir=args.output,
+            auto_open=not args.no_open,
+            json_output=args.json_output,
+            verbose=args.verbose,
+            timeout=args.timeout,
+            follow_redirects=not args.no_redirect,
+            check_robots=args.check_robots,
+            check_sitemap=args.check_sitemap,
+            detect_social=not args.no_social,
+            headers=request_headers,
+        )
+    except (ValueError, RuntimeError) as exc:
+        parser.error(str(exc))
 
 
 if __name__ == "__main__":

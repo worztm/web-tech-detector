@@ -22,7 +22,7 @@ Features:
     - Responsive dark theme with glassmorphism design
 """
 
-__version__ = "1.0.0"
+__version__ = "1.1.0"
 __author__ = "Waleed Masud"
 __description__ = "Detect 100+ web technologies with beautiful dark theme reports"
 

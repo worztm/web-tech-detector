@@ -12,7 +12,7 @@ with open("requirements.txt", "r", encoding="utf-8") as fh:
 
 setup(
     name="web-tech-detector",
-    version="1.0.0",
+    version="1.1.0",
     author="Waleed Masud",
     author_email="waleed@example.com",
     description="A tool to detect technologies used by websites and generate beautiful HTML reports",
