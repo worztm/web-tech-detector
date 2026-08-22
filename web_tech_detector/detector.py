@@ -358,6 +358,39 @@ TECHNOLOGY_PATTERNS: Dict[str, Dict[str, dict]] = {
             "version_patterns": [r"sveltekit@([\d\.]+)"],
             "category": "Static Site Generators & Bundlers",
         },
+        "Eleventy (11ty)": {
+            "patterns": [r"eleventy", r"11ty"],
+            "category": "Static Site Generators & Bundlers",
+        },
+        "Zola": {
+            "patterns": [r"generator.*zola", r"powered by zola"],
+            "category": "Static Site Generators & Bundlers",
+        },
+        "Bridgetown": {
+            "patterns": [r"bridgetown", r"/_bridgetown/"],
+            "category": "Static Site Generators & Bundlers",
+        },
+        "Docusaurus": {
+            "patterns": [r"docusaurus", r"__DOCUSAURUS", r"/docusaurus/"],
+            "version_patterns": [r"docusaurus@([\d\.]+)"],
+            "category": "Static Site Generators & Bundlers",
+        },
+        "VuePress": {
+            "patterns": [r"vuepress", r"/vuepress/", r"data-v-app.*vuepress"],
+            "category": "Static Site Generators & Bundlers",
+        },
+        "Starlight": {
+            "patterns": [r"starlight", r"astro-starlight", r"@astrojs/starlight"],
+            "category": "Static Site Generators & Bundlers",
+        },
+        "MkDocs": {
+            "patterns": [r"mkdocs", r"mkdocs-material"],
+            "category": "Static Site Generators & Bundlers",
+        },
+        "Hexo": {
+            "patterns": [r"hexo", r"generator.*hexo"],
+            "category": "Static Site Generators & Bundlers",
+        },
     },
     "CMS": {
         "WordPress": {
