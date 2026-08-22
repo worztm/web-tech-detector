@@ -2,7 +2,13 @@
 
 Web Technology Detector
 
-Detect 100+ web technologies with beautiful shadcn/ui-inspired dark theme reports.
+Detect 250+ web technologies with beautiful shadcn/ui-inspired dark theme reports.
+
+> **What's new in v1.2** — 120+ new technologies (payments, chat widgets, feature flags,
+> bot protection, serverless databases, icon sets and more), a full false-positive sweep
+> of every detection pattern, and a gorgeous upgraded report UI: scroll progress bar,
+> category filter chips, copy/export buttons, category distribution chart, favicons,
+> keyboard shortcuts (`/` to search) and staggered entrance animations.
 
 [Installation](#installation)  [Usage](#usage)  [Features](#features)  [Contributing](#contributing)
 
