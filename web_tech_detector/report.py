@@ -2142,6 +2142,36 @@ class ReportGenerator:
             body { background: #fff; color: #000; }
             .tech-row { break-inside: avoid; }
         }
+
+        /* ============================================================
+           Entrance Animations
+           ============================================================ */
+        @keyframes cardIn {
+            from { opacity: 0; transform: translateY(14px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        main > section,
+        main > .card {
+            animation: cardIn 0.55s cubic-bezier(0.22, 1, 0.36, 1) backwards;
+        }
+        main > *:nth-child(1) { animation-delay: 0.05s; }
+        main > *:nth-child(2) { animation-delay: 0.10s; }
+        main > *:nth-child(3) { animation-delay: 0.15s; }
+        main > *:nth-child(4) { animation-delay: 0.20s; }
+        main > *:nth-child(5) { animation-delay: 0.25s; }
+        main > *:nth-child(6) { animation-delay: 0.30s; }
+        main > *:nth-child(7) { animation-delay: 0.35s; }
+        main > *:nth-child(8) { animation-delay: 0.40s; }
+        main > *:nth-child(n+9) { animation-delay: 0.45s; }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+            html { scroll-behavior: auto; }
+        }
         """
 
     def _get_scripts(self) -> str:
