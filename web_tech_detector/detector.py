@@ -518,7 +518,7 @@ TECHNOLOGY_PATTERNS: Dict[str, Dict[str, dict]] = {
             "category": "Analytics & Marketing",
         },
         "Crisp Chat": {
-            "patterns": [r"crisp\.chat", r"crisp"],
+            "patterns": [r"crisp\.chat", r"window\.\$crisp", r"Crisp\("],
             "category": "Analytics & Marketing",
         },
         "Tidio": {
