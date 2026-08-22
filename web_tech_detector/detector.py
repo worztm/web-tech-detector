@@ -695,6 +695,18 @@ TECHNOLOGY_PATTERNS: Dict[str, Dict[str, dict]] = {
             "patterns": [r"heapanalytics\.com", r"heap\.app"],
             "category": "Analytics & Marketing",
         },
+        "PostHog": {
+            "patterns": [r"posthog", r"\bph-\w+-posthog", r"us\.posthog\.com", r"eu\.posthog\.com"],
+            "category": "Analytics & Marketing",
+        },
+        "Snowplow": {
+            "patterns": [r"snowplow", r"sp\.js", r"snowplowanalytics"],
+            "category": "Analytics & Marketing",
+        },
+        "FingerprintJS": {
+            "patterns": [r"fingerprintjs", r"openfpcdn\.io/fingerprintjs", r"@fingerprintjs"],
+            "category": "Analytics & Marketing",
+        },
         "FullStory": {
             "patterns": [r"fullstory\.com", r"_fs_ready", r"window\.FS"],
             "category": "Analytics & Marketing",
