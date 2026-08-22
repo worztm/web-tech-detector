@@ -521,7 +521,7 @@ TECHNOLOGY_PATTERNS: Dict[str, Dict[str, dict]] = {
             "category": "Analytics & Marketing",
         },
         "Crazy Egg": {
-            "patterns": [r"crazyegg", r"ccegg"],
+            "patterns": [r"script\.crazyegg\.com", r"crazyegg\.com"],
             "category": "Analytics & Marketing",
         },
         "VWO": {
