@@ -466,7 +466,7 @@ TECHNOLOGY_PATTERNS: Dict[str, Dict[str, dict]] = {
             "category": "Analytics & Marketing",
         },
         "Mixpanel": {
-            "patterns": [r"mixpanel\.com", r"mixpanel"],
+            "patterns": [r"cdn\.mxpnl\.com", r"mixpanel\.com", r"mixpanel\.track", r"window\.mixpanel"],
             "category": "Analytics & Marketing",
         },
         "Segment": {
