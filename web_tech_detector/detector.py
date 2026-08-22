@@ -214,7 +214,7 @@ TECHNOLOGY_PATTERNS: Dict[str, Dict[str, dict]] = {
             "category": "CSS Frameworks & Libraries",
         },
         "Emotion": {
-            "patterns": [r"@emotion", r"emotion", r"css\s*`"],
+            "patterns": [r"@emotion", r"emotion-icons", r"emotion-server"],
             "category": "CSS Frameworks & Libraries",
         },
         "Styled Components": {
