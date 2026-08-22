@@ -258,7 +258,7 @@ TECHNOLOGY_PATTERNS: Dict[str, Dict[str, dict]] = {
             "category": "Static Site Generators & Bundlers",
         },
         "Remix": {
-            "patterns": [r"remix", r"__remix", r"@remix-run"],
+            "patterns": [r"__remixContext", r"@remix-run", r"/build/remix", r"remix-run"],
             "version_patterns": [r"remix@([\d\.]+)"],
             "category": "Static Site Generators & Bundlers",
         },
