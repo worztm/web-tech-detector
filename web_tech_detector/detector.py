@@ -103,7 +103,7 @@ TECHNOLOGY_PATTERNS: Dict[str, Dict[str, dict]] = {
                 r"jquery(?:\.min)?\.js",
                 r"jquery-\d[\d\.]+",
                 r"jquery\.js",
-                r"\$\(function",
+                r"window\.jQuery",
                 r"jQuery\s*\(",
             ],
             "version_patterns": [r"jquery-([\d\.]+)", r"jQuery.*v?([\d\.]+)"],
