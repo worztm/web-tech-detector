@@ -1480,7 +1480,23 @@ TECHNOLOGY_PATTERNS: Dict[str, Dict[str, dict]] = {
             "category": "Databases",
         },
         "Supabase": {
-            "patterns": [r"supabase"],
+            "patterns": [r"supabase", r"supabase\.co", r"@supabase"],
+            "category": "Databases",
+        },
+        "Appwrite": {
+            "patterns": [r"appwrite", r"@appwrite"],
+            "category": "Databases",
+        },
+        "PocketBase": {
+            "patterns": [r"pocketbase", r"/_/pb-public"],
+            "category": "Databases",
+        },
+        "Hasura": {
+            "patterns": [r"hasura", r"hasura\.app", r"nhost"],
+            "category": "Databases",
+        },
+        "Apollo GraphQL": {
+            "patterns": [r"apollo-client", r"apollo-link", r"__APOLLO_STATE__", r"@apollo"],
             "category": "Databases",
         },
         "SQLite": {
