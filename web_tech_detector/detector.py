@@ -1376,7 +1376,19 @@ TECHNOLOGY_PATTERNS: Dict[str, Dict[str, dict]] = {
             "category": "Security",
         },
         "Sucuri": {
-            "patterns": [r"sucuri"],
+            "patterns": [r"sucuri", r"sucuri\.net"],
+            "category": "Security",
+        },
+        "Arkose Labs (FunCaptcha)": {
+            "patterns": [r"arkoselabs", r"funcaptcha", r"arkose", r"arkosechallenge"],
+            "category": "Security",
+        },
+        "GeeTest CAPTCHA": {
+            "patterns": [r"geetest", r"gt_slider"],
+            "category": "Security",
+        },
+        "F5 BIG-IP": {
+            "patterns": [r"BIGipServer", r"\bf5\b.*bigip", "TS\w{8,}="],
             "category": "Security",
         },
         "Wordfence": {
