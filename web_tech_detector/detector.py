@@ -1485,6 +1485,18 @@ TECHNOLOGY_PATTERNS: Dict[str, Dict[str, dict]] = {
             "patterns": [r"http3", r"http/3", r"alt-svc"],
             "category": "Features & Standards",
         },
+        "Web Components": {
+            "patterns": [r"customElements\.define", r"is=\"[a-z-]+\"", r"<[a-z]+-[a-z][a-z-]*[\s>]"],
+            "category": "Features & Standards",
+        },
+        "WebAssembly": {
+            "patterns": [r"\.wasm", r"WebAssembly\.", r"webassembly"],
+            "category": "Features & Standards",
+        },
+        "AMP": {
+            "patterns": [r"amp-boilerplate", r"amphtml", r"<amp-img", r"cdn\.ampproject\.org"],
+            "category": "Features & Standards",
+        },
     },
     "Databases": {
         "MySQL": {
