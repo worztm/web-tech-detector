@@ -477,6 +477,46 @@ TECHNOLOGY_PATTERNS: Dict[str, Dict[str, dict]] = {
             "patterns": [r"craftcms", r"craft\s+cms"],
             "category": "CMS",
         },
+        "Kirby CMS": {
+            "patterns": [r"kirby(?:cms)?\.(?:js|css)", r"generator.*kirby", r"media/kirby"],
+            "category": "CMS",
+        },
+        "Statamic": {
+            "patterns": [r"statamic", r"/statamic/"],
+            "category": "CMS",
+        },
+        "October CMS": {
+            "patterns": [r"octobercms", r"october\s+cms", r"/modules/system/assets"],
+            "category": "CMS",
+        },
+        "ExpressionEngine": {
+            "patterns": [r"expressionengine", r"act=expressionengine"],
+            "category": "CMS",
+        },
+        "ProcessWire": {
+            "patterns": [r"processwire", r"/site/templates/", r"/site/modules/"],
+            "category": "CMS",
+        },
+        "Silverstripe": {
+            "patterns": [r"silverstripe", r"/framework/", r"SilverStripe"],
+            "category": "CMS",
+        },
+        "Prismic": {
+            "patterns": [r"prismic", r"images\.prismic\.io", r"@prismicio"],
+            "category": "CMS",
+        },
+        "Storyblok": {
+            "patterns": [r"storyblok", r"@storyblok", r"a\.storyblok\.com"],
+            "category": "CMS",
+        },
+        "Payload CMS": {
+            "patterns": [r"payloadcms", r"@payloadcms", r"payload-api"],
+            "category": "CMS",
+        },
+        "Directus": {
+            "patterns": [r"directus", r"@directus"],
+            "category": "CMS",
+        },
     },
     "E-commerce": {
         "Shopify": {
