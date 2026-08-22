@@ -1449,6 +1449,18 @@ TECHNOLOGY_PATTERNS: Dict[str, Dict[str, dict]] = {
             "patterns": [r"loading=\"?lazy\"?", r"loading=\"?eager\"?"],
             "category": "Features & Standards",
         },
+        "Responsive Images": {
+            "patterns": [r"srcset=", r"<picture", r"sizes=\""],
+            "category": "Features & Standards",
+        },
+        "WebP Images": {
+            "patterns": [r"\.webp", r"type=\"image/webp\""],
+            "category": "Features & Standards",
+        },
+        "AVIF Images": {
+            "patterns": [r"\.avif", r"type=\"image/avif\""],
+            "category": "Features & Standards",
+        },
         "Preload": {
             "patterns": [r"rel=\"?preload\"?", r"rel=\"?prefetch\"?", r"rel=\"?preconnect\"?"],
             "category": "Features & Standards",
