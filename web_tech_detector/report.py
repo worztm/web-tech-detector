@@ -1226,6 +1226,12 @@ class ReportGenerator:
             background: linear-gradient(135deg, hsl(217 91% 60% / 0.15), hsl(271 81% 56% / 0.15));
             font-size: 2rem;
         }
+        .hero-favicon {
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: 0.5rem;
+        }
+        .is-hidden { display: none; }
         .hero-text { flex: 1; min-width: 0; }
         .hero-title {
             font-size: 1.5rem;
