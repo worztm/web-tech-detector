@@ -522,7 +522,7 @@ TECHNOLOGY_PATTERNS: Dict[str, Dict[str, dict]] = {
             "category": "Analytics & Marketing",
         },
         "Tidio": {
-            "patterns": [r"tidio"],
+            "patterns": [r"code\.tidio\.co", r"tidio\.co"],
             "category": "Analytics & Marketing",
         },
         "Drift": {
