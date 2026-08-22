@@ -323,7 +323,7 @@ Examples:
     print(f"  🔍  Web Technology Detector  {version_str}")
     print(f"  {'═' * 56}")
     if args.verbose:
-        print(f"  Detects 100+ technologies with confidence scoring and version extraction")
+        print(f"  Detects 250+ technologies with confidence scoring and version extraction")
         print(f"  {'─' * 56}")
 
     # Get URL from argument or prompt
