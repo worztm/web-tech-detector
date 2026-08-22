@@ -138,6 +138,39 @@ TECHNOLOGY_PATTERNS: Dict[str, Dict[str, dict]] = {
             "patterns": [r"petite-vue", r"PetiteVue"],
             "category": "JavaScript Frameworks",
         },
+        "Qwik": {
+            "patterns": [r"qwikloader", r"qwik(?:\.min)?\.js", r"on:click", r"preventdefault:click", r"builder\.io/qwik"],
+            "version_patterns": [r"qwik@([\d\.]+)"],
+            "category": "JavaScript Frameworks",
+        },
+        "SolidStart": {
+            "patterns": [r"solid-start", r"_solidstart", r"solidstart", r"@solidjs/start"],
+            "category": "JavaScript Frameworks",
+        },
+        "Fresh (Deno)": {
+            "patterns": [r"fresh-runtime", r"deno\.land/x/fresh", r"__FRSH_STATE"],
+            "category": "JavaScript Frameworks",
+        },
+        "Turbo (Hotwire)": {
+            "patterns": [r"turbo-frame", r"turbo-stream", r"@hotwired/turbo", r"Turbo\.session", r"turbo-es2017"],
+            "category": "JavaScript Frameworks",
+        },
+        "Knockout.js": {
+            "patterns": [r"knockout(?:\.min)?\.js", r"data-bind"],
+            "category": "JavaScript Frameworks",
+        },
+        "Riot.js": {
+            "patterns": [r"riot(?:\.min)?\.js", r"riot@\d[\d\.]*"],
+            "category": "JavaScript Frameworks",
+        },
+        "Aurelia": {
+            "patterns": [r"aurelia(?:\.min)?\.js", r"aurelia-app"],
+            "category": "JavaScript Frameworks",
+        },
+        "Marko": {
+            "patterns": [r"marko(?:\.min)?\.js", r"\$global\.Marko", r"marko-prettyerror"],
+            "category": "JavaScript Frameworks",
+        },
     },
     "CSS Frameworks & Libraries": {
         "Bootstrap": {
