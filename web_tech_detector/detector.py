@@ -470,7 +470,7 @@ TECHNOLOGY_PATTERNS: Dict[str, Dict[str, dict]] = {
             "category": "Analytics & Marketing",
         },
         "Segment": {
-            "patterns": [r"segment\.com/analytics", r"analytics\.js"],
+            "patterns": [r"cdn\.segment\.com", r"segment\.io/analytics", r"analytics\.load\("],
             "category": "Analytics & Marketing",
         },
         "Plausible": {
