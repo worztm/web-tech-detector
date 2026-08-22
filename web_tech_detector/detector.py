@@ -493,7 +493,7 @@ TECHNOLOGY_PATTERNS: Dict[str, Dict[str, dict]] = {
             "category": "Analytics & Marketing",
         },
         "Reddit Pixel": {
-            "patterns": [r"reddit\.com/static/ads", r"reddit.*pixel"],
+            "patterns": [r"redditstatic\.com/ads", r"\brtq\("],
             "category": "Analytics & Marketing",
         },
         "HubSpot": {
