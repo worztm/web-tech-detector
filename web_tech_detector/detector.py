@@ -330,7 +330,7 @@ TECHNOLOGY_PATTERNS: Dict[str, Dict[str, dict]] = {
             "category": "CMS",
         },
         "Wix": {
-            "patterns": [r"wix", r"wixstatic\.com", r"Wix\.com"],
+            "patterns": [r"wixstatic\.com", r"wix\.com", r"wix-code", r"_wixCssStates"],
             "category": "CMS",
         },
         "Squarespace": {
