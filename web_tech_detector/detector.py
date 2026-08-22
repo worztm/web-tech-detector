@@ -568,6 +568,18 @@ TECHNOLOGY_PATTERNS: Dict[str, Dict[str, dict]] = {
             "patterns": [r"lemonsqueezy", r"lmsq"],
             "category": "E-commerce",
         },
+        "Medusa": {
+            "patterns": [r"medusa-js", r"@medusajs", r"store\.medusa"],
+            "category": "E-commerce",
+        },
+        "Saleor": {
+            "patterns": [r"saleor", r"@saleor"],
+            "category": "E-commerce",
+        },
+        "Shopify Hydrogen": {
+            "patterns": [r"@shopify/hydrogen", r"shopify-hydrogen", r"hydrogen-shopify"],
+            "category": "E-commerce",
+        },
     },
     "Analytics & Marketing": {
         "Google Analytics": {
