@@ -1133,6 +1133,22 @@ TECHNOLOGY_PATTERNS: Dict[str, Dict[str, dict]] = {
             "patterns": [r"unpkg\.com"],
             "category": "Hosting & CDN",
         },
+        "Cloudinary": {
+            "patterns": [r"cloudinary", r"res\.cloudinary\.com"],
+            "category": "Hosting & CDN",
+        },
+        "imgix": {
+            "patterns": [r"imgix", r"\.imgix\.net"],
+            "category": "Hosting & CDN",
+        },
+        "ImageKit": {
+            "patterns": [r"imagekit", r"ik\.imagekit\.io"],
+            "category": "Hosting & CDN",
+        },
+        "Uploadcare": {
+            "patterns": [r"uploadcare", r"ucarecdn\.com"],
+            "category": "Hosting & CDN",
+        },
         "cdnjs": {
             "patterns": [r"cdnjs\.cloudflare\.com"],
             "category": "Hosting & CDN",
