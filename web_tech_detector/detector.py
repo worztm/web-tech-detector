@@ -234,7 +234,7 @@ TECHNOLOGY_PATTERNS: Dict[str, Dict[str, dict]] = {
             "category": "Static Site Generators & Bundlers",
         },
         "Gatsby": {
-            "patterns": [r"gatsby", r"___gatsby", r"gatsby-"],
+            "patterns": [r"___gatsby", r"gatsby-", r"/gatsby/", r"gatsby-image"],
             "version_patterns": [r"gatsby@([\d\.]+)"],
             "category": "Static Site Generators & Bundlers",
         },
