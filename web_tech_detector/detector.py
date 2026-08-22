@@ -939,6 +939,42 @@ TECHNOLOGY_PATTERNS: Dict[str, Dict[str, dict]] = {
             "patterns": [r"heroicons"],
             "category": "UI Libraries & Components",
         },
+        "Material Symbols & Icons": {
+            "patterns": [r"material-symbols", r"material-icons", r"Material\+Icons", r"Material\+Symbols"],
+            "category": "UI Libraries & Components",
+        },
+        "Ionicons": {
+            "patterns": [r"ionicons", r"<ion-icon"],
+            "category": "UI Libraries & Components",
+        },
+        "Tabler Icons": {
+            "patterns": [r"@tabler/icons", r"tabler-icons", r"[\"' ]ti ti-"],
+            "category": "UI Libraries & Components",
+        },
+        "Phosphor Icons": {
+            "patterns": [r"@phosphor-icons", r"phosphoricons", r"[\"' ]ph ph-", r"[\"' ]ph-[a-z]+-light"],
+            "category": "UI Libraries & Components",
+        },
+        "Remix Icon": {
+            "patterns": [r"remixicon", r"[\"' ]ri-[a-z0-9]+-(?:line|fill)"],
+            "category": "UI Libraries & Components",
+        },
+        "Bootstrap Icons": {
+            "patterns": [r"bootstrap-icons", r"[\"' ]bi-[a-z0-9]"],
+            "category": "UI Libraries & Components",
+        },
+        "Feather Icons": {
+            "patterns": [r"feather-icons", r"feather(?:\.min)?\.js", r"data-feather"],
+            "category": "UI Libraries & Components",
+        },
+        "Boxicons": {
+            "patterns": [r"boxicons", r"[\"' ]bx[bxs]? [lb]-"],
+            "category": "UI Libraries & Components",
+        },
+        "Iconify": {
+            "patterns": [r"iconify", r"@iconify", r"<iconify-icon"],
+            "category": "UI Libraries & Components",
+        },
     },
     "Security": {
         "reCAPTCHA": {
