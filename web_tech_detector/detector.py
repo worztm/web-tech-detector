@@ -763,6 +763,34 @@ TECHNOLOGY_PATTERNS: Dict[str, Dict[str, dict]] = {
             "patterns": [r"cdn\.optimizely\.com", r"optimizely\.com", r"window\.optimizely"],
             "category": "Analytics & Marketing",
         },
+        "LaunchDarkly": {
+            "patterns": [r"launchdarkly", r"ldflag", r"clientstream\.launchdarkly"],
+            "category": "Analytics & Marketing",
+        },
+        "Statsig": {
+            "patterns": [r"statsig", r"featuregates\.org", r"statsigapi\.net"],
+            "category": "Analytics & Marketing",
+        },
+        "GrowthBook": {
+            "patterns": [r"growthbook", r"growthbook\.io"],
+            "category": "Analytics & Marketing",
+        },
+        "Tealium": {
+            "patterns": [r"tealium", r"tiqcdn"],
+            "category": "Analytics & Marketing",
+        },
+        "Adobe Launch (DTM)": {
+            "patterns": [r"assets\.adobedtm\.com", r"_satellite"],
+            "category": "Analytics & Marketing",
+        },
+        "Vercel Analytics": {
+            "patterns": [r"va\.vercel-scripts\.com", r"/_vercel/insights", r"vercel-analytics"],
+            "category": "Analytics & Marketing",
+        },
+        "Cloudflare Web Analytics": {
+            "patterns": [r"cloudflareinsights", r"beacon\.js.*cloudflareinsights"],
+            "category": "Analytics & Marketing",
+        },
         "Google Ads": {
             "patterns": [r"googleads", r"googlesyndication", r"pagead2\.googlesyndication"],
             "category": "Analytics & Marketing",
