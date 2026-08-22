@@ -879,6 +879,39 @@ TECHNOLOGY_PATTERNS: Dict[str, Dict[str, dict]] = {
             "version_patterns": [r"Tomcat/([\d\.]+)"],
             "category": "Web Servers",
         },
+        "Envoy Proxy": {
+            "patterns": [r"x-envoy", r"envoy(?:proxy)?\.(?:min)?js", r"envoy-"],
+            "category": "Web Servers",
+        },
+        "Traefik": {
+            "patterns": [r"traefik"],
+            "category": "Web Servers",
+        },
+        "HAProxy": {
+            "patterns": [r"haproxy"],
+            "category": "Web Servers",
+        },
+        "Lighttpd": {
+            "patterns": [r"lighttpd"],
+            "version_patterns": [r"lighttpd/([\d\.]+)"],
+            "category": "Web Servers",
+        },
+        "Varnish": {
+            "patterns": [r"x-varnish", r"varnish(?:cache)?", r"x-cache.*varnish"],
+            "category": "Web Servers",
+        },
+        "Kestrel": {
+            "patterns": [r"kestrel"],
+            "category": "Web Servers",
+        },
+        "WildFly": {
+            "patterns": [r"wildfly", r"jboss"],
+            "category": "Web Servers",
+        },
+        "Jetty": {
+            "patterns": [r"\bjetty\b", r"Jetty/"],
+            "category": "Web Servers",
+        },
     },
     "Programming Languages & Runtimes": {
         "PHP": {
