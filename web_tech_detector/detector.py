@@ -355,7 +355,7 @@ TECHNOLOGY_PATTERNS: Dict[str, Dict[str, dict]] = {
             "category": "CMS",
         },
         "Strapi": {
-            "patterns": [r"strapi", r"Strapi"],
+            "patterns": [r"strapi\.io", r"@strapi", r"/strapi/", r"strapi-plugin"],
             "category": "CMS",
         },
         "Sanity": {
