@@ -564,6 +564,26 @@ TECHNOLOGY_PATTERNS: Dict[str, Dict[str, dict]] = {
             "patterns": [r"gumroad"],
             "category": "E-commerce",
         },
+        "PayPal": {
+            "patterns": [r"paypal(?:objects)?\.com", r"paypal\.com/sdk", r"data-paypal", r"data-paypal-express"],
+            "category": "E-commerce",
+        },
+        "Braintree": {
+            "patterns": [r"braintree(?:gateway)?\.com", r"braintree-web", r"braintree-dropin"],
+            "category": "E-commerce",
+        },
+        "Adyen": {
+            "patterns": [r"adyen", r"checkoutshopper", r"checkout\.adyen\.com"],
+            "category": "E-commerce",
+        },
+        "Square": {
+            "patterns": [r"squareup\.com", r"square-marketplace", r"web-sandbox\.square"],
+            "category": "E-commerce",
+        },
+        "Klarna": {
+            "patterns": [r"klarna", r"x-klarna-", r"klarna-payments"],
+            "category": "E-commerce",
+        },
         "Lemon Squeezy": {
             "patterns": [r"lemonsqueezy", r"lmsq"],
             "category": "E-commerce",
