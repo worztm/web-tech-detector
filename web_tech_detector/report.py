@@ -411,7 +411,7 @@ class ReportGenerator:
                     <span class="section-count">{len(all_techs)}</span>
                 </h3>
                 <div class="section-actions">
-                    <button class="btn btn-ghost btn-sm" id="expandAll">Expand All</button>
+                    <button class="btn btn-ghost btn-sm" id="expandAll">Show Details</button>
                 </div>
             </div>
             <div class="tech-pills" id="techPills">
@@ -2006,7 +2006,7 @@ class ReportGenerator:
                     toggles.forEach(toggle => {
                         toggle.classList.toggle('is-open', isAnyHidden);
                     });
-                    this.textContent = isAnyHidden ? 'Collapse All' : 'Expand All';
+                    this.textContent = isAnyHidden ? 'Hide Details' : 'Show Details';
                 });
             }
         });
