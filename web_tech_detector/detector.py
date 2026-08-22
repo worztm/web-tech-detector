@@ -186,7 +186,7 @@ TECHNOLOGY_PATTERNS: Dict[str, Dict[str, dict]] = {
             "category": "CSS Frameworks & Libraries",
         },
         "Chakra UI": {
-            "patterns": [r"chakra-ui", r"chakra"],
+            "patterns": [r"chakra-ui", r"@chakra", r"chakra\.css"],
             "category": "CSS Frameworks & Libraries",
         },
         "Radix UI": {
