@@ -306,6 +306,11 @@ class ReportGenerator:
             {json_ld_section}
         </main>
 
+        <!-- Back to top -->
+        <button class="back-to-top" id="backToTop" aria-label="Back to top">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg>
+        </button>
+
         <!-- Footer -->
         <footer class="footer">
             <div class="container">
@@ -1788,6 +1793,40 @@ class ReportGenerator:
         /* ============================================================
            Footer
            ============================================================ */
+        /* ============================================================
+           Back To Top
+           ============================================================ */
+        .back-to-top {
+            position: fixed;
+            bottom: 1.5rem;
+            right: 1.5rem;
+            z-index: 150;
+            width: 2.75rem;
+            height: 2.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 9999px;
+            background: hsl(var(--primary));
+            color: hsl(var(--primary-foreground));
+            border: none;
+            cursor: pointer;
+            opacity: 0;
+            transform: translateY(12px);
+            pointer-events: none;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 8px 24px hsl(217 91% 60% / 0.35);
+        }
+        .back-to-top.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+        .back-to-top:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 32px hsl(217 91% 60% / 0.45);
+        }
+
         .footer {
             border-top: 1px solid hsl(var(--border) / 0.3);
             margin-top: 2rem;
@@ -1912,6 +1951,17 @@ class ReportGenerator:
             }
             window.addEventListener('scroll', updateScrollProgress, { passive: true });
             updateScrollProgress();
+
+            // Back-to-top button
+            const backToTop = document.getElementById('backToTop');
+            function toggleBackToTop() {
+                if (backToTop) backToTop.classList.toggle('is-visible', window.scrollY > 600);
+            }
+            window.addEventListener('scroll', toggleBackToTop, { passive: true });
+            toggleBackToTop();
+            if (backToTop) {
+                backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+            }
 
             // Count-up animation for stat cards
             const countUps = document.querySelectorAll('.count-up');
