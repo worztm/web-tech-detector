@@ -526,7 +526,7 @@ TECHNOLOGY_PATTERNS: Dict[str, Dict[str, dict]] = {
             "category": "Analytics & Marketing",
         },
         "Drift": {
-            "patterns": [r"drift"],
+            "patterns": [r"drift\.com/embed", r"driftt\.com", r"window\.drift", r"drift-widget"],
             "category": "Analytics & Marketing",
         },
         "Mouseflow": {
