@@ -622,7 +622,7 @@ TECHNOLOGY_PATTERNS: Dict[str, Dict[str, dict]] = {
             "category": "Programming Languages & Runtimes",
         },
         "Flask": {
-            "patterns": [r"flask"],
+            "patterns": [r"werkzeug", r"jinja2", r"x-powered-by.*flask", r"flask-session"],
             "category": "Programming Languages & Runtimes",
         },
         "Ruby on Rails": {
