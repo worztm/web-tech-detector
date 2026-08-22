@@ -946,7 +946,7 @@ TECHNOLOGY_PATTERNS: Dict[str, Dict[str, dict]] = {
             "category": "Features & Standards",
         },
         "Sitemap": {
-            "patterns": [r"sitemap", r"sitemap\.xml"],
+            "patterns": [r"rel=\"sitemap\"", r"urlset", r"sitemapindex"],
             "category": "Features & Standards",
         },
         "Robots.txt": {
