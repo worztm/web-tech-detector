@@ -631,7 +631,7 @@ TECHNOLOGY_PATTERNS: Dict[str, Dict[str, dict]] = {
             "category": "Programming Languages & Runtimes",
         },
         "Express": {
-            "patterns": [r"express"],
+            "patterns": [r"x-powered-by.*express", r"express-session", r"express-validator", r"etag.*x-powered"],
             "version_patterns": [r"Express\s*([\d\.]+)"],
             "category": "Programming Languages & Runtimes",
         },
