@@ -343,7 +343,7 @@ TECHNOLOGY_PATTERNS: Dict[str, Dict[str, dict]] = {
             "category": "CMS",
         },
         "Contentful": {
-            "patterns": [r"contentful"],
+            "patterns": [r"ctfassets\.net", r"contentful\.com", r"contentful"],
             "category": "CMS",
         },
         "Webflow": {
