@@ -248,7 +248,7 @@ TECHNOLOGY_PATTERNS: Dict[str, Dict[str, dict]] = {
             "category": "Static Site Generators & Bundlers",
         },
         "Astro": {
-            "patterns": [r"astro", r"__ASTRO_"],
+            "patterns": [r"astro-island", r"/_astro/", r"@astrojs", r"astro\.dev"],
             "version_patterns": [r"astro@([\d\.]+)"],
             "category": "Static Site Generators & Bundlers",
         },
