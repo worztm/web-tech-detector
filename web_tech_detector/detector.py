@@ -268,7 +268,7 @@ TECHNOLOGY_PATTERNS: Dict[str, Dict[str, dict]] = {
             "category": "Static Site Generators & Bundlers",
         },
         "Parcel": {
-            "patterns": [r"parcel", r"parcel-bundler"],
+            "patterns": [r"parcel-bundler", r"parcelRequire", r"@parcel"],
             "category": "Static Site Generators & Bundlers",
         },
         "Rollup": {
