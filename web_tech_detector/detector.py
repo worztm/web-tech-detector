@@ -589,7 +589,7 @@ TECHNOLOGY_PATTERNS: Dict[str, Dict[str, dict]] = {
             "category": "Programming Languages & Runtimes",
         },
         "Ruby": {
-            "patterns": [r"ruby", r"rails", r"passenger", r"rack"],
+            "patterns": [r"X-Ruby-Version", r"phusion passenger", r"ruby-lang", r"x-request-id.*rack"],
             "version_patterns": [r"Ruby\s*([\d\.]+)"],
             "category": "Programming Languages & Runtimes",
         },
