@@ -1137,6 +1137,30 @@ TECHNOLOGY_PATTERNS: Dict[str, Dict[str, dict]] = {
             "patterns": [r"cdnjs\.cloudflare\.com"],
             "category": "Hosting & CDN",
         },
+        "Fly.io": {
+            "patterns": [r"fly\.dev", r"\bfly\.io\b"],
+            "category": "Hosting & CDN",
+        },
+        "Deno Deploy": {
+            "patterns": [r"deno\.dev", r"denodeploy"],
+            "category": "Hosting & CDN",
+        },
+        "DigitalOcean": {
+            "patterns": [r"digitalocean(?:spaces)?\.com", r"digitalocean"],
+            "category": "Hosting & CDN",
+        },
+        "AWS Amplify": {
+            "patterns": [r"amplifyapp\.com", r"aws-amplify", r"@aws-amplify"],
+            "category": "Hosting & CDN",
+        },
+        "Firebase Hosting": {
+            "patterns": [r"firebaseapp\.com", r"firebasehosting", r"web\.app.*firebase"],
+            "category": "Hosting & CDN",
+        },
+        "Cloudflare Workers": {
+            "patterns": [r"workers\.dev", r"wrangler", r"__CF$cv$"],
+            "category": "Hosting & CDN",
+        },
     },
     "UI Libraries & Components": {
         "Material UI": {
