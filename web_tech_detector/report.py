@@ -2057,6 +2057,21 @@ class ReportGenerator:
                 });
             }
 
+            // Keyboard shortcuts
+            document.addEventListener('keydown', function(e) {
+                const tag = (document.activeElement && document.activeElement.tagName) || '';
+                const typing = tag === 'INPUT' || tag === 'TEXTAREA';
+                if (e.key === '/' && !typing) {
+                    e.preventDefault();
+                    if (searchInput) { searchInput.focus(); searchInput.select(); }
+                }
+                if (e.key === 'Escape' && searchInput && searchInput === document.activeElement) {
+                    searchInput.value = '';
+                    filterTechs('');
+                    searchInput.blur();
+                }
+            });
+
             // Hint chips
             hintChips.forEach(chip => {
                 chip.addEventListener('click', function() {
