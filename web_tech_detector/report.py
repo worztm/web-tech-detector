@@ -1363,6 +1363,66 @@ class ReportGenerator:
         }
 
         /* ============================================================
+           Category Chips & Legend
+           ============================================================ */
+        .cat-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.375rem;
+            margin-top: 0.875rem;
+        }
+        .cat-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.375rem;
+            padding: 0.3rem 0.7rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            font-family: inherit;
+            background: hsl(var(--muted) / 0.4);
+            border: 1px solid hsl(var(--border) / 0.5);
+            color: hsl(var(--muted-foreground));
+            cursor: pointer;
+            transition: all 0.18s cubic-bezier(0.4, 0, 0.2, 1);
+            user-select: none;
+        }
+        .cat-chip:hover {
+            border-color: hsl(var(--primary) / 0.45);
+            color: hsl(var(--primary));
+            transform: translateY(-1px);
+        }
+        .cat-chip.is-active {
+            background: hsl(var(--primary));
+            border-color: hsl(var(--primary));
+            color: hsl(var(--primary-foreground));
+            box-shadow: 0 4px 14px hsl(217 91% 60% / 0.35);
+        }
+        .cat-chip-count {
+            font-size: 0.65rem;
+            font-weight: 700;
+            padding: 0.05rem 0.4rem;
+            border-radius: 9999px;
+            background: hsl(var(--background) / 0.6);
+        }
+        .legend {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+        .legend-divider {
+            width: 1px;
+            height: 0.9rem;
+            background: hsl(var(--border));
+            margin: 0 0.25rem;
+        }
+        .cookie-name {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            opacity: 0.6;
+        }
+
+        /* ============================================================
            Tech Pills / Grid
            ============================================================ */
         .tech-grid-section {
