@@ -922,7 +922,7 @@ TECHNOLOGY_PATTERNS: Dict[str, Dict[str, dict]] = {
             "category": "Features & Standards",
         },
         "GraphQL": {
-            "patterns": [r"graphql", r"__typename", r"query\s+\w+\s*\{", r"mutation\s+\w+\s*\{"],
+            "patterns": [r"/graphql", r"graphql", r"__typename", r"apollo-client"],
             "category": "Features & Standards",
         },
         "REST API": {
