@@ -926,7 +926,7 @@ TECHNOLOGY_PATTERNS: Dict[str, Dict[str, dict]] = {
             "category": "Features & Standards",
         },
         "REST API": {
-            "patterns": [r"/api/", r"application/json", r"application/vnd\.api"],
+            "patterns": [r"/api/v\d", r"application/vnd\.api", r"x-api-key", r"api-version"],
             "category": "Features & Standards",
         },
         "Lazy Loading": {
