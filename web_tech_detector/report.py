@@ -410,7 +410,8 @@ class ReportGenerator:
     def _safe_json_export(self) -> str:
         """Serialize results for embedding in a JSON script tag."""
         payload = json.dumps(self._sanitize_for_json(self.results), indent=2, ensure_ascii=False, default=str)
-        return payload.replace("</", "<\/")
+        # Prevent </script> breakouts inside the embedded JSON block
+        return payload.replace("</", "<" + chr(92) + "/")
 
     def _build_distribution_section(self, html_techs: Dict[str, list]) -> str:
         """Build a horizontal bar chart showing technologies per category."""
