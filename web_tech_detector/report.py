@@ -1873,6 +1873,31 @@ class ReportGenerator:
         }
 
         /* ============================================================
+           Toast
+           ============================================================ */
+        .toast {
+            position: fixed;
+            bottom: 1.5rem;
+            left: 50%;
+            transform: translate(-50%, 16px);
+            z-index: 300;
+            padding: 0.6rem 1.25rem;
+            border-radius: 9999px;
+            background: hsl(var(--foreground));
+            color: hsl(var(--background));
+            font-size: 0.8125rem;
+            font-weight: 600;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+            box-shadow: var(--shadow-lg);
+        }
+        .toast.is-visible {
+            opacity: 1;
+            transform: translate(-50%, 0);
+        }
+
+        /* ============================================================
            Footer
            ============================================================ */
         /* ============================================================
