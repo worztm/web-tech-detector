@@ -1558,7 +1558,27 @@ TECHNOLOGY_PATTERNS: Dict[str, Dict[str, dict]] = {
             "category": "DevOps & CI/CD",
         },
         "New Relic": {
-            "patterns": [r"newrelic", r"new-relic"],
+            "patterns": [r"newrelic", r"new-relic", r"NREUM"],
+            "category": "DevOps & CI/CD",
+        },
+        "Rollbar": {
+            "patterns": [r"rollbar", r"_rollbarConfig"],
+            "category": "DevOps & CI/CD",
+        },
+        "Bugsnag": {
+            "patterns": [r"bugsnag", r"d2wy8f7a9ursnm\.cloudfront\.net"],
+            "category": "DevOps & CI/CD",
+        },
+        "LogRocket": {
+            "patterns": [r"logrocket", r"lr-ingest\.io", r"_lr_"],
+            "category": "DevOps & CI/CD",
+        },
+        "Raygun": {
+            "patterns": [r"raygun", r"api\.raygun\.io", r"rg4js"],
+            "category": "DevOps & CI/CD",
+        },
+        "Honeybadger": {
+            "patterns": [r"honeybadger", r"js\.honeybadger\.io"],
             "category": "DevOps & CI/CD",
         },
     },
