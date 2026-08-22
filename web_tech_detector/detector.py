@@ -477,7 +477,7 @@ TECHNOLOGY_PATTERNS: Dict[str, Dict[str, dict]] = {
             "category": "Analytics & Marketing",
         },
         "FullStory": {
-            "patterns": [r"fullstory\.com", r"fullstory"],
+            "patterns": [r"fullstory\.com", r"_fs_ready", r"window\.FS"],
             "category": "Analytics & Marketing",
         },
         "Microsoft Clarity": {
