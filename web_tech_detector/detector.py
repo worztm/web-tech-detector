@@ -1557,6 +1557,34 @@ TECHNOLOGY_PATTERNS: Dict[str, Dict[str, dict]] = {
             "patterns": [r"datadog(?:hq)?\.com", r"DD_RUM", r"dd-api-root"],
             "category": "DevOps & CI/CD",
         },
+        "Grafana": {
+            "patterns": [r"grafana", r"\bgraf\."],
+            "category": "DevOps & CI/CD",
+        },
+        "Prometheus": {
+            "patterns": [r"prometheus"],
+            "category": "DevOps & CI/CD",
+        },
+        "PagerDuty": {
+            "patterns": [r"pagerduty", r"pd-js"],
+            "category": "DevOps & CI/CD",
+        },
+        "Atlassian Statuspage": {
+            "patterns": [r"statuspage\.io", r"status-page-production"],
+            "category": "DevOps & CI/CD",
+        },
+        "UptimeRobot": {
+            "patterns": [r"uptimerobot", r"uptime-robot"],
+            "category": "DevOps & CI/CD",
+        },
+        "Better Stack Uptime": {
+            "patterns": [r"betterstack", r"uptime\.betterstack", r"logtail"],
+            "category": "DevOps & CI/CD",
+        },
+        "Checkly": {
+            "patterns": [r"checkly", r"checklyhq"],
+            "category": "DevOps & CI/CD",
+        },
         "New Relic": {
             "patterns": [r"newrelic", r"new-relic", r"NREUM"],
             "category": "DevOps & CI/CD",
