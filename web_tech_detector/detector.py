@@ -1488,7 +1488,23 @@ TECHNOLOGY_PATTERNS: Dict[str, Dict[str, dict]] = {
             "category": "Databases",
         },
         "Prisma": {
-            "patterns": [r"prisma"],
+            "patterns": [r"prisma", r"@prisma", r"prisma-client"],
+            "category": "Databases",
+        },
+        "PlanetScale": {
+            "patterns": [r"planetscale", r"psdb\.cloud"],
+            "category": "Databases",
+        },
+        "Neon Database": {
+            "patterns": [r"neon\.tech", r"neon\.database", r"@neondatabase"],
+            "category": "Databases",
+        },
+        "Turso": {
+            "patterns": [r"turso\.tech", r"libsql", r"@tursodatabase"],
+            "category": "Databases",
+        },
+        "Upstash": {
+            "patterns": [r"upstash", r"upstash\.io"],
             "category": "Databases",
         },
     },
