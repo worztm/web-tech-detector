@@ -594,7 +594,7 @@ TECHNOLOGY_PATTERNS: Dict[str, Dict[str, dict]] = {
             "category": "Programming Languages & Runtimes",
         },
         "Node.js": {
-            "patterns": [r"node\.js", r"express", r"__node", r"node_modules"],
+            "patterns": [r"node\.js", r"x-powered-by.*node", r"next-server", r"__node"],
             "version_patterns": [r"Node\.?js?/([\d\.]+)", r"node/([\d\.]+)"],
             "category": "Programming Languages & Runtimes",
         },
