@@ -1014,7 +1014,7 @@ TECHNOLOGY_PATTERNS: Dict[str, Dict[str, dict]] = {
             "category": "DevOps & CI/CD",
         },
         "Kubernetes": {
-            "patterns": [r"kubernetes", r"k8s"],
+            "patterns": [r"kubernetes\.io", r"k8s\.io", r"x-kubernetes"],
             "category": "DevOps & CI/CD",
         },
         "GitHub Actions": {
