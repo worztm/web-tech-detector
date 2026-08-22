@@ -514,7 +514,7 @@ TECHNOLOGY_PATTERNS: Dict[str, Dict[str, dict]] = {
             "category": "Analytics & Marketing",
         },
         "Intercom": {
-            "patterns": [r"intercom", r"Intercom"],
+            "patterns": [r"intercomcdn\.com", r"widget\.intercom\.io", r"intercom\.io", r"window\.Intercom"],
             "category": "Analytics & Marketing",
         },
         "Crisp Chat": {
