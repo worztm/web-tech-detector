@@ -735,6 +735,22 @@ TECHNOLOGY_PATTERNS: Dict[str, Dict[str, dict]] = {
             "patterns": [r"googleads", r"googlesyndication", r"pagead2\.googlesyndication"],
             "category": "Analytics & Marketing",
         },
+        "Fathom Analytics": {
+            "patterns": [r"usefathom\.com", r"fathom-analytics"],
+            "category": "Analytics & Marketing",
+        },
+        "Umami": {
+            "patterns": [r"umami\.is", r"umami(?:\.min)?\.js"],
+            "category": "Analytics & Marketing",
+        },
+        "GoatCounter": {
+            "patterns": [r"goatcounter", r"gc\.zgo\.at"],
+            "category": "Analytics & Marketing",
+        },
+        "Simple Analytics": {
+            "patterns": [r"simpleanalytics", r"scripts\.simpleanalyticscdn\.com"],
+            "category": "Analytics & Marketing",
+        },
     },
     "Web Servers": {
         "Nginx": {
