@@ -244,7 +244,7 @@ TECHNOLOGY_PATTERNS: Dict[str, Dict[str, dict]] = {
             "category": "Static Site Generators & Bundlers",
         },
         "Jekyll": {
-            "patterns": [r"jekyll", r"jekyll-"],
+            "patterns": [r"powered by jekyll", r"generator.*jekyll", r"github-pages.*jekyll"],
             "category": "Static Site Generators & Bundlers",
         },
         "Astro": {
