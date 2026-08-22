@@ -254,6 +254,47 @@ TECHNOLOGY_PATTERNS: Dict[str, Dict[str, dict]] = {
             "patterns": [r"styled-components", r"styled\..*`"],
             "category": "CSS Frameworks & Libraries",
         },
+        "Vuetify": {
+            "patterns": [r"vuetify(?:\.min)?\.(?:css|js)", r"v-application--wrap", r"v-toolbar", r"v-navigation-drawer", r"v-main"],
+            "version_patterns": [r"vuetify@([\d\.]+)"],
+            "category": "CSS Frameworks & Libraries",
+        },
+        "Quasar": {
+            "patterns": [r"quasar(?:\.min)?\.(?:css|js|umd|prod)", r"[\"' ]q-(?:btn|layout|header|drawer|table)"],
+            "category": "CSS Frameworks & Libraries",
+        },
+        "Element Plus": {
+            "patterns": [r"element-plus", r"[\"' ]el-(?:button|input|table|dialog)"],
+            "category": "CSS Frameworks & Libraries",
+        },
+        "Naive UI": {
+            "patterns": [r"naive-ui", r"[\"' ]n-(?:button|card|layout)", r"--n-[a-z-]+:"],
+            "category": "CSS Frameworks & Libraries",
+        },
+        "Mantine": {
+            "patterns": [r"@mantine", r"mantine(?:\.min)?\.css", r"mantine-[a-z0-9]+"],
+            "category": "CSS Frameworks & Libraries",
+        },
+        "PrimeReact": {
+            "patterns": [r"primereact", r"primeicons", r"[\"' ]p-component"],
+            "category": "CSS Frameworks & Libraries",
+        },
+        "PrimeVue": {
+            "patterns": [r"primevue", r"primeicons", r"[\"' ]p-component"],
+            "category": "CSS Frameworks & Libraries",
+        },
+        "HeroUI (NextUI)": {
+            "patterns": [r"@heroui", r"heroui", r"@nextui-org", r"nextui"],
+            "category": "CSS Frameworks & Libraries",
+        },
+        "daisyUI": {
+            "patterns": [r"daisyui", r"mockup-browser", r"[\"' ]steps[\"' ].*step-"],
+            "category": "CSS Frameworks & Libraries",
+        },
+        "Flowbite": {
+            "patterns": [r"flowbite"],
+            "category": "CSS Frameworks & Libraries",
+        },
     },
     "Static Site Generators & Bundlers": {
         "Next.js": {
