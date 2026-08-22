@@ -469,7 +469,7 @@ TECHNOLOGY_PATTERNS: Dict[str, Dict[str, dict]] = {
             "category": "Analytics & Marketing",
         },
         "Amplitude": {
-            "patterns": [r"amplitude"],
+            "patterns": [r"amplitude\.com", r"amplitude(?:\.min)?\.js", r"window\.amplitude"],
             "category": "Analytics & Marketing",
         },
         "Heap": {
