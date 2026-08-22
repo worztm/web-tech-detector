@@ -517,7 +517,7 @@ TECHNOLOGY_PATTERNS: Dict[str, Dict[str, dict]] = {
             "category": "Analytics & Marketing",
         },
         "Mouseflow": {
-            "patterns": [r"mouseflow"],
+            "patterns": [r"cdn\.mouseflow\.com", r"mouseflow\.com"],
             "category": "Analytics & Marketing",
         },
         "Crazy Egg": {
