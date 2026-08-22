@@ -494,7 +494,7 @@ TECHNOLOGY_PATTERNS: Dict[str, Dict[str, dict]] = {
             "category": "Analytics & Marketing",
         },
         "Microsoft Clarity": {
-            "patterns": [r"clarity\.ms", r"c\.clarium\.io".replace("clarium","larity-ms")],
+            "patterns": [r"clarity\.ms", r"clarity\.liara\.dev"],
             "category": "Analytics & Marketing",
         },
         "LinkedIn Insight Tag": {
