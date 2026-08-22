@@ -579,7 +579,7 @@ TECHNOLOGY_PATTERNS: Dict[str, Dict[str, dict]] = {
     },
     "Programming Languages & Runtimes": {
         "PHP": {
-            "patterns": [r"\.php", r"x-powered-by.*php", r"PHP/", r"php"],
+            "patterns": [r"\.php", r"x-powered-by.*php", r"PHP/", r"wp-content"],
             "version_patterns": [r"PHP/([\d\.]+)", r"x-powered-by.*PHP/([\d\.]+)"],
             "category": "Programming Languages & Runtimes",
         },
