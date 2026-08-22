@@ -538,7 +538,7 @@ TECHNOLOGY_PATTERNS: Dict[str, Dict[str, dict]] = {
             "category": "Analytics & Marketing",
         },
         "VWO": {
-            "patterns": [r"vwo"],
+            "patterns": [r"visualwebsiteoptimizer\.com", r"vwo\.com", r"window\.VWO"],
             "category": "Analytics & Marketing",
         },
         "Optimizely": {
