@@ -248,7 +248,9 @@ class ReportGenerator:
                 <div class="hero-bg"></div>
                 <div class="hero-content">
                     <div class="hero-icon-wrap">
-                        <span class="hero-icon">🌐</span>
+                        <img class="hero-favicon" src="https://www.google.com/s2/favicons?domain={self._escape(self.domain)}&sz=128" alt="" loading="lazy"
+                             onerror="this.classList.add('is-hidden'); this.nextElementSibling.classList.remove('is-hidden');">
+                        <span class="hero-icon is-hidden">🌐</span>
                     </div>
                     <div class="hero-text">
                         <h2 class="hero-title">{self._escape(self.title)}</h2>
