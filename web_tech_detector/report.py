@@ -181,7 +181,7 @@ class ReportGenerator:
 
         # Build sections
         stats_section = self._build_stats_section(total_count, total_categories, status_code, json_ld_count)
-        search_section = self._build_search_section()
+        search_section = self._build_search_section(html_techs)
         meta_section = self._build_meta_section(meta_techs)
         server_section = self._build_server_section(server_info)
         performance_section = self._build_performance_section(performance)
@@ -356,9 +356,23 @@ class ReportGenerator:
             {cards}
         </section>"""
 
-    def _build_search_section(self) -> str:
+    def _build_search_section(self, html_techs: Dict[str, list]) -> str:
         """Build the search/filter section for technologies."""
-        return """
+        chips = ""
+        for category, techs in sorted(html_techs.items()):
+            if not techs:
+                continue
+            icon = CATEGORY_ICONS.get(category, "📦")
+            chips += f"""
+                <button class="cat-chip" data-cat="{self._escape(category.lower())}">
+                    <span>{icon}</span>
+                    {self._escape(category)}
+                    <span class="cat-chip-count">{len(techs)}</span>
+                </button>"""
+        chips_block = f"""
+            <div class="cat-chips" id="catChips">{chips}
+            </div>""" if chips else ""
+        return f"""
         <section class="search-section glass">
             <div class="search-inner">
                 <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -372,7 +386,12 @@ class ReportGenerator:
                     </svg>
                 </button>
             </div>
+            {chips_block}
             <div class="search-hints">
+                <span class="legend"><span class="tech-pill-indicator confidence-high"></span> High</span>
+                <span class="legend"><span class="tech-pill-indicator confidence-medium"></span> Medium</span>
+                <span class="legend"><span class="tech-pill-indicator confidence-low"></span> Low</span>
+                <span class="legend-divider"></span>
                 <span>Try: <button class="hint-chip" data-hint="react">React</button></span>
                 <span><button class="hint-chip" data-hint="wordpress">WordPress</button></span>
                 <span><button class="hint-chip" data-hint="cloudflare">Cloudflare</button></span>
