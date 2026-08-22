@@ -660,7 +660,27 @@ TECHNOLOGY_PATTERNS: Dict[str, Dict[str, dict]] = {
             "category": "Analytics & Marketing",
         },
         "Plausible": {
-            "patterns": [r"plausible\.io", r"plausible"],
+            "patterns": [r"plausible\.io", r"\bplausible\b"],
+            "category": "Analytics & Marketing",
+        },
+        "Yandex Metrica": {
+            "patterns": [r"mc\.yandex\.ru", r"ym\(\d{4,}", r"metrika(?:\.min)?\.js", r"yandex_metrica"],
+            "category": "Analytics & Marketing",
+        },
+        "Baidu Analytics": {
+            "patterns": [r"hm\.baidu\.com", r"hm\.js\?"],
+            "category": "Analytics & Marketing",
+        },
+        "StatCounter": {
+            "patterns": [r"statcounter", r"sc_project"],
+            "category": "Analytics & Marketing",
+        },
+        "Chartbeat": {
+            "patterns": [r"chartbeat", r"ping\.chartbeat\.net"],
+            "category": "Analytics & Marketing",
+        },
+        "Clicky": {
+            "patterns": [r"static\.getclicky\.com", r"clicky_site_ids"],
             "category": "Analytics & Marketing",
         },
         "Matomo": {
