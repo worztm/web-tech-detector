@@ -338,7 +338,7 @@ TECHNOLOGY_PATTERNS: Dict[str, Dict[str, dict]] = {
             "category": "CMS",
         },
         "Ghost": {
-            "patterns": [r"ghost/", r"ghost-", r"Ghost\s+"],
+            "patterns": [r"ghost-portal", r"content_api_key", r"generator.*ghost", r"ghost\.min\.js"],
             "version_patterns": [r"Ghost\s+([\d\.]+)"],
             "category": "CMS",
         },
