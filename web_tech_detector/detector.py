@@ -975,6 +975,31 @@ TECHNOLOGY_PATTERNS: Dict[str, Dict[str, dict]] = {
             "patterns": [r"fastapi"],
             "category": "Programming Languages & Runtimes",
         },
+        "Spring Framework": {
+            "patterns": [r"spring", r"x-application-context", r"spring-boot"],
+            "category": "Programming Languages & Runtimes",
+        },
+        "ASP.NET Core": {
+            "patterns": [r"aspnetcore", r"x-powered-by.*asp\.net", r".AspNetCore\.", r"blazor-server"],
+            "category": "Programming Languages & Runtimes",
+        },
+        "Blazor": {
+            "patterns": [r"blazor", r"_framework/blazor", r"_bl_", r"blazor\.webassembly"],
+            "category": "Programming Languages & Runtimes",
+        },
+        "Laravel": {
+            "patterns": [r"laravel", r"laravel_session", r"XSRF-TOKEN"],
+            "version_patterns": [r"laravel@([\d\.]+)", r"Laravel/([\d\.]+)"],
+            "category": "Programming Languages & Runtimes",
+        },
+        "Livewire": {
+            "patterns": [r"livewire", r"wire:snapshot", r"wire:id", r"wire:model"],
+            "category": "Programming Languages & Runtimes",
+        },
+        "Inertia.js": {
+            "patterns": [r"@inertiajs", r"inertiajs", r"data-page.*component.*props"],
+            "category": "Programming Languages & Runtimes",
+        },
         "Deno": {
             "patterns": [r"deno"],
             "category": "Programming Languages & Runtimes",
