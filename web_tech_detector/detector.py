@@ -1387,6 +1387,26 @@ TECHNOLOGY_PATTERNS: Dict[str, Dict[str, dict]] = {
             "patterns": [r"mod_security", r"ModSecurity"],
             "category": "Security",
         },
+        "DataDome": {
+            "patterns": [r"datadome", r"geo\.captcha-datadome", r"dd\.recaptcha"],
+            "category": "Security",
+        },
+        "HUMAN (PerimeterX)": {
+            "patterns": [r"perimeterx", r"px-captcha", r"_pxvid", r"px\.client", r"humansecurity"],
+            "category": "Security",
+        },
+        "Kasada": {
+            "patterns": [r"kasada", r"_kpsdk", r"kasada\.io"],
+            "category": "Security",
+        },
+        "Imperva / Incapsula": {
+            "patterns": [r"imperva", r"incapsula", r"_incap_", r"visid_incap"],
+            "category": "Security",
+        },
+        "Akamai Bot Manager": {
+            "patterns": [r"_abck", r"bmak", r"akamai-sw"],
+            "category": "Security",
+        },
     },
     "Features & Standards": {
         "Schema.org": {
