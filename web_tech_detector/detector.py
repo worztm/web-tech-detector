@@ -1388,7 +1388,7 @@ TECHNOLOGY_PATTERNS: Dict[str, Dict[str, dict]] = {
             "category": "Security",
         },
         "F5 BIG-IP": {
-            "patterns": [r"BIGipServer", r"\bf5\b.*bigip", "TS\w{8,}="],
+            "patterns": [r"BIGipServer", r"\bf5\b.*bigip", r"TS\w{8,}="],
             "category": "Security",
         },
         "Wordfence": {
