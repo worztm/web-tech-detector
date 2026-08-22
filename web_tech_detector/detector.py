@@ -202,7 +202,7 @@ TECHNOLOGY_PATTERNS: Dict[str, Dict[str, dict]] = {
             "category": "CSS Frameworks & Libraries",
         },
         "Open Props": {
-            "patterns": [r"open-props", r"--(?:md-|lg-|xl-|sm-)"],
+            "patterns": [r"open-props", r"openprops"],
             "category": "CSS Frameworks & Libraries",
         },
         "Pico CSS": {
