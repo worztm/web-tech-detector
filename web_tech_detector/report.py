@@ -323,6 +323,8 @@ class ReportGenerator:
         </footer>
     </div>
 
+    <div class="toast" id="toast"></div>
+
     <script>
         {self._get_scripts()}
     </script>
@@ -436,6 +438,7 @@ class ReportGenerator:
                     <span class="section-count">{len(all_techs)}</span>
                 </h3>
                 <div class="section-actions">
+                    <button class="btn btn-ghost btn-sm" id="copyAll">Copy List</button>
                     <button class="btn btn-ghost btn-sm" id="expandAll">Show Details</button>
                 </div>
             </div>
@@ -2189,6 +2192,20 @@ class ReportGenerator:
                 });
             });
 
+            // Copy-all button with toast feedback
+            const copyBtn = document.getElementById('copyAll');
+            if (copyBtn) {
+                copyBtn.addEventListener('click', function() {
+                    const names = Array.from(document.querySelectorAll('.tech-pill .tech-pill-name'))
+                        .map(el => el.textContent.trim());
+                    if (!names.length) return;
+                    const text = names.join(', ');
+                    (navigator.clipboard ? navigator.clipboard.writeText(text) : Promise.reject())
+                        .then(() => showToast('Copied ' + names.length + ' technologies 📋'))
+                        .catch(() => showToast('Copy failed 😕'));
+                });
+            }
+
             // Expand All button
             const expandBtn = document.getElementById('expandAll');
             if (expandBtn) {
@@ -2207,6 +2224,16 @@ class ReportGenerator:
                 });
             }
         });
+
+        // Toast notification helper
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            if (!toast) return;
+            toast.textContent = message;
+            toast.classList.add('is-visible');
+            clearTimeout(toast._t);
+            toast._t = setTimeout(() => toast.classList.remove('is-visible'), 2200);
+        }
 
         // Global functions for inline onclick
         function toggleAccordion(id) {
