@@ -1473,6 +1473,58 @@ class ReportGenerator:
         }
 
         /* ============================================================
+           Category Distribution Chart
+           ============================================================ */
+        .dist-chart {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        .dist-row {
+            display: grid;
+            grid-template-columns: 220px 1fr 2.5rem;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        .dist-label {
+            font-size: 0.8125rem;
+            color: hsl(var(--muted-foreground));
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .dist-track {
+            height: 8px;
+            border-radius: 9999px;
+            background: hsl(var(--muted) / 0.4);
+            overflow: hidden;
+        }
+        .dist-fill {
+            height: 100%;
+            border-radius: 9999px;
+            transform-origin: left;
+            animation: distGrow 0.9s cubic-bezier(0.22, 1, 0.36, 1) backwards;
+            box-shadow: 0 0 10px rgb(255 255 255 / 0.06);
+        }
+        @keyframes distGrow {
+            from { transform: scaleX(0); }
+            to { transform: scaleX(1); }
+        }
+        .dist-count {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-align: right;
+            color: hsl(var(--foreground));
+        }
+        @media (max-width: 768px) {
+            .dist-row {
+                grid-template-columns: 130px 1fr 2rem;
+                gap: 0.5rem;
+            }
+        }
+
+        /* ============================================================
            Tech Pills / Grid
            ============================================================ */
         .tech-grid-section {
