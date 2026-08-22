@@ -239,7 +239,7 @@ TECHNOLOGY_PATTERNS: Dict[str, Dict[str, dict]] = {
             "category": "Static Site Generators & Bundlers",
         },
         "Hugo": {
-            "patterns": [r"hugo", r"themes/"],
+            "patterns": [r"generator.*hugo", r"/hugo/", r"hugo-extended", r"powered by hugo"],
             "version_patterns": [r"Hugo\s+([\d\.]+)"],
             "category": "Static Site Generators & Bundlers",
         },
