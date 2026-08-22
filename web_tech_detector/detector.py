@@ -983,6 +983,24 @@ TECHNOLOGY_PATTERNS: Dict[str, Dict[str, dict]] = {
             "patterns": [r"bun\.sh", r"bun@\d[\d\.]*", r"node_modules/bun", r"\bBun\s+v?\d"],
             "category": "Programming Languages & Runtimes",
         },
+        "Gunicorn": {
+            "patterns": [r"gunicorn"],
+            "version_patterns": [r"Gunicorn/([\d\.]+)"],
+            "category": "Programming Languages & Runtimes",
+        },
+        "uWSGI": {
+            "patterns": [r"uwsgi"],
+            "category": "Programming Languages & Runtimes",
+        },
+        "Uvicorn": {
+            "patterns": [r"uvicorn"],
+            "version_patterns": [r"uvicorn/([\d\.]+)"],
+            "category": "Programming Languages & Runtimes",
+        },
+        "Phusion Passenger": {
+            "patterns": [r"phusion passenger", r"passenger-stat"],
+            "category": "Programming Languages & Runtimes",
+        },
     },
     "Hosting & CDN": {
         "Cloudflare": {
