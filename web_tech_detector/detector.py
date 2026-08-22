@@ -1469,6 +1469,22 @@ TECHNOLOGY_PATTERNS: Dict[str, Dict[str, dict]] = {
             "patterns": [r"itemscope", r"itemprop", r"itemtype"],
             "category": "Features & Standards",
         },
+        "Speculation Rules API": {
+            "patterns": [r"speculationrules", r"prerender.*speculation"],
+            "category": "Features & Standards",
+        },
+        "quicklink Prefetch": {
+            "patterns": [r"quicklink(?:\.min)?\.js", r"window\.quicklink"],
+            "category": "Features & Standards",
+        },
+        "instant.page": {
+            "patterns": [r"instantpage", r"instant\.page", r"instantclick"],
+            "category": "Features & Standards",
+        },
+        "Workbox": {
+            "patterns": [r"workbox", r"workbox-sw", r"workbox-background-sync"],
+            "category": "Features & Standards",
+        },
         "RSS Feed": {
             "patterns": [r"application/rss\+xml", r"application/atom\+xml", r"/feed\.xml", r"/rss\.xml", r"/atom\.xml"],
             "category": "Features & Standards",
