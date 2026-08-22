@@ -258,7 +258,7 @@ class ReportGenerator:
                         </div>
                     </div>
                     <div class="hero-status">
-                        <div class="status-dot {'status-success' if self.results.get('status_code') in [200, 201, 204, 301, 302] else 'status-warning'}"></div>
+                        <div class="status-dot {'status-success' if (self.results.get('status_code') or 0) < 300 else 'status-warning' if (self.results.get('status_code') or 0) < 400 else 'status-error'}"></div>
                         <span>{self.results.get('status_code', 'N/A')}</span>
                     </div>
                 </div>
