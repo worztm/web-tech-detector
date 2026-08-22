@@ -347,7 +347,7 @@ TECHNOLOGY_PATTERNS: Dict[str, Dict[str, dict]] = {
             "category": "CMS",
         },
         "Webflow": {
-            "patterns": [r"webflow"],
+            "patterns": [r"webflow\.(?:js|css)", r"data-wf-", r"assets\.website-files\.com", r"cdn\.prod\.website-files\.com", r"generator.*webflow"],
             "category": "CMS",
         },
         "TYPO3": {
