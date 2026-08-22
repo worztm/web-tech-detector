@@ -649,6 +649,40 @@ class ReportGenerator:
             </div>
         </section>"""
 
+    def _build_cookie_section(self, cookie_findings: List[Dict]) -> str:
+        """Build the cookie technology findings section."""
+        if not cookie_findings:
+            return ""
+
+        rows = ""
+        for finding in cookie_findings:
+            rows += f"""
+            <div class="tech-row">
+                <div class="tech-row-info">
+                    <span class="tech-row-badge" style="background: hsl(142 71% 45% / 0.15); color: hsl(142 71% 45%); border: 1px solid hsl(142 71% 45% / 0.3);">
+                        {self._escape(finding.get('tech', 'Unknown'))}
+                    </span>
+                    <span class="cookie-name">{self._escape(finding.get('cookie', ''))}</span>
+                </div>
+                <div class="tech-row-meta">
+                    <span class="tech-row-confidence confidence-high">🟢 high</span>
+                </div>
+            </div>"""
+
+        return f"""
+        <section class="card glass">
+            <div class="section-header">
+                <h3 class="section-title">
+                    <span class="section-icon">🍪</span>
+                    Cookie Technology Findings
+                    <span class="section-count">{len(cookie_findings)}</span>
+                </h3>
+            </div>
+            <div class="tech-list">
+                {rows}
+            </div>
+        </section>"""
+
     def _build_robots_section(self, robots: Optional[str]) -> str:
         """Build robots.txt section."""
         if not robots:
