@@ -1010,7 +1010,7 @@ TECHNOLOGY_PATTERNS: Dict[str, Dict[str, dict]] = {
     },
     "DevOps & CI/CD": {
         "Docker": {
-            "patterns": [r"docker"],
+            "patterns": [r"docker\.io", r"docker-compose", r"Dockerfile", r"containerd"],
             "category": "DevOps & CI/CD",
         },
         "Kubernetes": {
