@@ -445,6 +445,7 @@ class ReportGenerator:
                     <span class="section-count">{len(all_techs)}</span>
                 </h3>
                 <div class="section-actions">
+                    <button class="btn btn-ghost btn-sm" id="downloadJson">⬇ JSON</button>
                     <button class="btn btn-ghost btn-sm" id="copyAll">Copy List</button>
                     <button class="btn btn-ghost btn-sm" id="expandAll">Show Details</button>
                 </div>
@@ -2235,6 +2236,22 @@ class ReportGenerator:
                     (navigator.clipboard ? navigator.clipboard.writeText(text) : Promise.reject())
                         .then(() => showToast('Copied ' + names.length + ' technologies 📋'))
                         .catch(() => showToast('Copy failed 😕'));
+                });
+            }
+
+            // Download embedded JSON
+            const dlBtn = document.getElementById('downloadJson');
+            if (dlBtn) {
+                dlBtn.addEventListener('click', function() {
+                    const dataEl = document.getElementById('report-data');
+                    if (!dataEl) return;
+                    const blob = new Blob([dataEl.textContent], { type: 'application/json' });
+                    const a = document.createElement('a');
+                    a.href = URL.createObjectURL(blob);
+                    a.download = 'tech_report_' + location.pathname.replace(/[^a-z0-9]+/gi, '_') + '.json';
+                    a.click();
+                    URL.revokeObjectURL(a.href);
+                    showToast('JSON exported ⬇');
                 });
             }
 
