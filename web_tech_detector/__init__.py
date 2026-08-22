@@ -7,7 +7,7 @@ security tools, and more. Generates beautiful shadcn/ui-inspired dark theme HTML
 with interactive search, filtering, confidence scoring, and version extraction.
 
 Features:
-    - 100+ technology detection patterns with regex-based matching
+    - 250+ technology detection patterns with regex-based matching
     - Version extraction from scripts, headers, and metadata
     - Confidence scoring (high/medium/low) with evidence tracking
     - WordPress plugin/theme extraction
@@ -22,7 +22,7 @@ Features:
     - Responsive dark theme with glassmorphism design
 """
 
-__version__ = "1.1.0"
+__version__ = "1.2.0"
 __author__ = "Waleed Masud"
 __description__ = "Detect 100+ web technologies with beautiful dark theme reports"
 
