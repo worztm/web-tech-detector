@@ -181,6 +181,7 @@ class ReportGenerator:
 
         # Build sections
         stats_section = self._build_stats_section(total_count, total_categories, status_code, json_ld_count)
+        distribution_section = self._build_distribution_section(html_techs)
         search_section = self._build_search_section(html_techs)
         meta_section = self._build_meta_section(meta_techs)
         server_section = self._build_server_section(server_info)
@@ -268,6 +269,9 @@ class ReportGenerator:
 
             <!-- Stats Grid -->
             {stats_section}
+
+            <!-- Category Distribution -->
+            {distribution_section}
 
             <!-- Search / Filter -->
             {search_section}
@@ -407,6 +411,41 @@ class ReportGenerator:
         """Serialize results for embedding in a JSON script tag."""
         payload = json.dumps(self._sanitize_for_json(self.results), indent=2, ensure_ascii=False, default=str)
         return payload.replace("</", "<\/")
+
+    def _build_distribution_section(self, html_techs: Dict[str, list]) -> str:
+        """Build a horizontal bar chart showing technologies per category."""
+        if not html_techs:
+            return ""
+        total = sum(len(t) for t in html_techs.values())
+        max_count = max(len(t) for t in html_techs.values()) or 1
+        bars = ""
+        for category, techs in sorted(html_techs.items(), key=lambda kv: -len(kv[1])):
+            if not techs:
+                continue
+            icon = CATEGORY_ICONS.get(category, "📦")
+            hsl = CATEGORY_HSL.get(category, "215, 16%, 47%")
+            pct_width = round(len(techs) / max_count * 100, 1)
+            bars += f"""
+                <div class="dist-row">
+                    <div class="dist-label">{icon} {self._escape(category)}</div>
+                    <div class="dist-track">
+                        <div class="dist-fill" style="width: {pct_width}%; background: linear-gradient(90deg, hsl({hsl} / 0.55), hsl({hsl}));"></div>
+                    </div>
+                    <div class="dist-count">{len(techs)}</div>
+                </div>"""
+        return f"""
+        <section class="card glass">
+            <div class="section-header">
+                <h3 class="section-title">
+                    <span class="section-icon">📊</span>
+                    Category Distribution
+                </h3>
+                <span class="badge badge-ghost">{total} total</span>
+            </div>
+            <div class="dist-chart">
+                {bars}
+            </div>
+        </section>"""
 
     def _build_tech_grid(self, html_techs: Dict[str, list]) -> str:
         """Build a visual badge grid of all detected technologies."""
