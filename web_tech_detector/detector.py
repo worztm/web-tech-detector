@@ -373,7 +373,7 @@ TECHNOLOGY_PATTERNS: Dict[str, Dict[str, dict]] = {
             "category": "CMS",
         },
         "Sanity": {
-            "patterns": [r"sanity"],
+            "patterns": [r"@sanity", r"sanity\.io", r"cdn\.sanity\.io", r"sanity-studio"],
             "category": "CMS",
         },
         "Umbraco": {
