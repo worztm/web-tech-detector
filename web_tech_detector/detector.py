@@ -942,7 +942,7 @@ TECHNOLOGY_PATTERNS: Dict[str, Dict[str, dict]] = {
             "category": "Features & Standards",
         },
         "RSS Feed": {
-            "patterns": [r"rss", r"feed", r"atom"],
+            "patterns": [r"application/rss\+xml", r"application/atom\+xml", r"/feed\.xml", r"/rss\.xml", r"/atom\.xml"],
             "category": "Features & Standards",
         },
         "Sitemap": {
