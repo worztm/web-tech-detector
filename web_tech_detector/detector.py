@@ -657,7 +657,7 @@ TECHNOLOGY_PATTERNS: Dict[str, Dict[str, dict]] = {
             "category": "Programming Languages & Runtimes",
         },
         "Bun": {
-            "patterns": [r"\bbun\b"],
+            "patterns": [r"bun\.sh", r"bun@\d[\d\.]*", r"node_modules/bun", r"\bBun\s+v?\d"],
             "category": "Programming Languages & Runtimes",
         },
     },
