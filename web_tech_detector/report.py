@@ -323,7 +323,7 @@ class ReportGenerator:
                 <div class="footer-inner">
                     <p>Generated on {self.results.get('detected_at', 'N/A')}</p>
                     <div class="footer-dot"></div>
-                    <p>Web Technology Detector v1.0</p>
+                    <p>Web Technology Detector v1.2</p>
                 </div>
             </div>
         </footer>
