@@ -1172,29 +1172,72 @@ class TechnologyDetector:
         techs = []
 
         header_checks = {
-            "php": {"name": "PHP", "field": "X-Powered-By"},
-            "asp.net": {"name": "ASP.NET", "field": "X-AspNet-Version"},
-            "express": {"name": "Node.js/Express", "field": "X-Powered-By"},
-            "django": {"name": "Django", "field": "X-Powered-By"},
-            "rails": {"name": "Ruby on Rails", "field": "X-Powered-By"},
-            "cloudflare": {"name": "Cloudflare", "field": "cf-ray"},
-            "nginx": {"name": "Nginx", "field": "Server"},
+            "x-powered-by": [
+                {"re": r"php", "name": "PHP", "version_re": r"PHP/([\d\.]+)"},
+                {"re": r"asp\.net", "name": "ASP.NET", "version_re": None},
+                {"re": r"express", "name": "Express", "version_re": None},
+                {"re": r"django", "name": "Django", "version_re": None},
+                {"re": r"rails", "name": "Ruby on Rails", "version_re": None},
+                {"re": r"next\.js", "name": "Next.js", "version_re": None},
+                {"re": r"liferay", "name": "Liferay", "version_re": None},
+            ],
+            "server": [
+                {"re": r"nginx", "name": "Nginx", "version_re": r"nginx/([\d\.]+)"},
+                {"re": r"apache", "name": "Apache", "version_re": r"Apache/([\d\.]+)"},
+                {"re": r"litespeed", "name": "LiteSpeed", "version_re": r"LiteSpeed\s*([\d\.]+)"},
+                {"re": r"microsoft-iis", "name": "IIS", "version_re": r"Microsoft-IIS/([\d\.]+)"},
+                {"re": r"caddy", "name": "Caddy", "version_re": r"Caddy/([\d\.]+)"},
+                {"re": r"gunicorn", "name": "Gunicorn", "version_re": r"Gunicorn/([\d\.]+)"},
+                {"re": r"uvicorn", "name": "Uvicorn", "version_re": r"uvicorn/([\d\.]+)"},
+                {"re": r"envoy", "name": "Envoy", "version_re": None},
+                {"re": r"traefik", "name": "Traefik", "version_re": None},
+                {"re": r"kestrel", "name": "Kestrel", "version_re": None},
+            ],
+            "cf-ray": [{"re": None, "name": "Cloudflare", "version_re": None}],
+            "cf-cache-status": [{"re": None, "name": "Cloudflare Cache", "version_re": None}],
+            "x-vercel-id": [{"re": None, "name": "Vercel", "version_re": None}],
+            "x-nf-request-id": [{"re": None, "name": "Netlify", "version_re": None}],
+            "x-amz-cf-id": [{"re": None, "name": "AWS CloudFront", "version_re": None}],
+            "x-fastly-request-id": [{"re": None, "name": "Fastly", "version_re": None}],
+            "x-shopify-stage": [{"re": None, "name": "Shopify", "version_re": None}],
+            "x-github-request-id": [{"re": None, "name": "GitHub", "version_re": None}],
+            "x-drupal-cache": [{"re": None, "name": "Drupal", "version_re": None}],
+            "x-varnish": [{"re": None, "name": "Varnish", "version_re": None}],
+            "x-envoy-upstream-service-time": [{"re": None, "name": "Envoy Proxy", "version_re": None}],
+            "via": [{"re": r"varnish", "name": "Varnish", "version_re": None},
+                    {"re": r"squid", "name": "Squid", "version_re": None}],
         }
 
         seen = set()
-        for header, value in headers.items():
-            if isinstance(value, str):
-                value_lower = value.lower()
-                for pattern, info in header_checks.items():
-                    if pattern in value_lower and info["name"] not in seen:
-                        techs.append({
-                            "name": info["name"],
-                            "version": self._extract_header_version(pattern, value),
-                            "confidence": "high",
-                            "evidence_count": 1,
-                            "from_header": header,
-                        })
-                        seen.add(info["name"])
+
+        def _emit(name, version, header):
+            if name and name not in seen:
+                seen.add(name)
+                techs.append({
+                    "name": name,
+                    "version": version,
+                    "confidence": "high",
+                    "evidence_count": 1,
+                    "from_header": header,
+                })
+
+        for header, checks in header_checks.items():
+            if header not in headers:
+                continue
+            value = headers.get(header, "")
+            if not isinstance(value, str):
+                continue
+            for info in checks:
+                # re=None means mere presence of the header is the signal;
+                # otherwise match the regex against the header value.
+                if info["re"] is not None and not re.search(info["re"], value, re.IGNORECASE):
+                    continue
+                version = None
+                if info["version_re"]:
+                    vm = re.search(info["version_re"], value, re.IGNORECASE)
+                    if vm:
+                        version = vm.group(1)
+                _emit(info["name"], version, header)
 
         return techs
 
