@@ -604,7 +604,7 @@ TECHNOLOGY_PATTERNS: Dict[str, Dict[str, dict]] = {
             "category": "Programming Languages & Runtimes",
         },
         "Java": {
-            "patterns": [r"java", r"servlet", r"jsp", r"JVM"],
+            "patterns": [r"servlet", r"\bjsp\b", r"JVM", r"x-powered-by.*(?:java|jsp|servlet)"],
             "version_patterns": [r"Java\s*([\d\._]+)"],
             "category": "Programming Languages & Runtimes",
         },
