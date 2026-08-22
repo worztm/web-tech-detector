@@ -1038,7 +1038,7 @@ TECHNOLOGY_PATTERNS: Dict[str, Dict[str, dict]] = {
             "category": "DevOps & CI/CD",
         },
         "Datadog": {
-            "patterns": [r"datadog"],
+            "patterns": [r"datadog(?:hq)?\.com", r"DD_RUM", r"dd-api-root"],
             "category": "DevOps & CI/CD",
         },
         "New Relic": {
