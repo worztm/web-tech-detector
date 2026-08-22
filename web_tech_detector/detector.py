@@ -542,7 +542,7 @@ TECHNOLOGY_PATTERNS: Dict[str, Dict[str, dict]] = {
             "category": "Analytics & Marketing",
         },
         "Optimizely": {
-            "patterns": [r"optimizely"],
+            "patterns": [r"cdn\.optimizely\.com", r"optimizely\.com", r"window\.optimizely"],
             "category": "Analytics & Marketing",
         },
         "Google Ads": {
