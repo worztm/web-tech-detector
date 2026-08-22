@@ -325,6 +325,8 @@ class ReportGenerator:
 
     <div class="toast" id="toast"></div>
 
+    <script id="report-data" type="application/json">{self._safe_json_export()}</script>
+
     <script>
         {self._get_scripts()}
     </script>
@@ -400,6 +402,11 @@ class ReportGenerator:
                 <span><button class="hint-chip" data-hint="shopify">Shopify</button></span>
             </div>
         </section>"""
+
+    def _safe_json_export(self) -> str:
+        """Serialize results for embedding in a JSON script tag."""
+        payload = json.dumps(self._sanitize_for_json(self.results), indent=2, ensure_ascii=False, default=str)
+        return payload.replace("</", "<\/")
 
     def _build_tech_grid(self, html_techs: Dict[str, list]) -> str:
         """Build a visual badge grid of all detected technologies."""
