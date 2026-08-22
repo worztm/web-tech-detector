@@ -503,7 +503,7 @@ TECHNOLOGY_PATTERNS: Dict[str, Dict[str, dict]] = {
             "category": "Analytics & Marketing",
         },
         "Twitter Pixel": {
-            "patterns": [r"static\.ads-twitter\.com", r"twitter.*pixel"],
+            "patterns": [r"static\.ads-twitter\.com", r"\btwq\("],
             "category": "Analytics & Marketing",
         },
         "Reddit Pixel": {
