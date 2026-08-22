@@ -747,6 +747,34 @@ TECHNOLOGY_PATTERNS: Dict[str, Dict[str, dict]] = {
             "patterns": [r"drift\.com/embed", r"driftt\.com", r"window\.drift", r"drift-widget"],
             "category": "Analytics & Marketing",
         },
+        "Tawk.to": {
+            "patterns": [r"tawk\.to", r"Tawk_API", r"Tawk_LoadStart"],
+            "category": "Analytics & Marketing",
+        },
+        "LiveChat": {
+            "patterns": [r"livechatinc\.com", r"livechat\.js", r"__lc\.license"],
+            "category": "Analytics & Marketing",
+        },
+        "Zendesk Widget": {
+            "patterns": [r"zdassets\.com", r"ze-snippet", r"zopim"],
+            "category": "Analytics & Marketing",
+        },
+        "Freshchat": {
+            "patterns": [r"freshchat", r"wchat\.freshchat\.com", r"freshworkscrm"],
+            "category": "Analytics & Marketing",
+        },
+        "Olark": {
+            "patterns": [r"olark", r"chat\.olark\.com"],
+            "category": "Analytics & Marketing",
+        },
+        "LivePerson": {
+            "patterns": [r"liveperson", r"lptag", r"livepermon"],
+            "category": "Analytics & Marketing",
+        },
+        "WhatsApp Chat Button": {
+            "patterns": [r"wa\.me/", r"api\.whatsapp\.com/send", r"whatsapp-chat"],
+            "category": "Analytics & Marketing",
+        },
         "Mouseflow": {
             "patterns": [r"cdn\.mouseflow\.com", r"mouseflow\.com"],
             "category": "Analytics & Marketing",
