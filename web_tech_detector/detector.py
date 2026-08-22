@@ -560,6 +560,26 @@ TECHNOLOGY_PATTERNS: Dict[str, Dict[str, dict]] = {
             "patterns": [r"snipcart"],
             "category": "E-commerce",
         },
+        "Afterpay / Clearpay": {
+            "patterns": [r"afterpay", r"clearpay", r"afterpay-code"],
+            "category": "E-commerce",
+        },
+        "Razorpay": {
+            "patterns": [r"razorpay", r"checkout\.razorpay\.com"],
+            "category": "E-commerce",
+        },
+        "Mercado Pago": {
+            "patterns": [r"mercadopago", r"mercadolibre-payment"],
+            "category": "E-commerce",
+        },
+        "Apple Pay": {
+            "patterns": [r"apple-pay", r"applepay", r"apple-pay-button"],
+            "category": "E-commerce",
+        },
+        "Google Pay": {
+            "patterns": [r"googlepay", r"google-pay", r"payments\.googleapis\.com"],
+            "category": "E-commerce",
+        },
         "Gumroad": {
             "patterns": [r"gumroad"],
             "category": "E-commerce",
