@@ -1001,7 +1001,36 @@ TECHNOLOGY_PATTERNS: Dict[str, Dict[str, dict]] = {
             "category": "Programming Languages & Runtimes",
         },
         "Deno": {
-            "patterns": [r"deno"],
+            "patterns": [r"\bdeno\b", r"deno\.deploy", r"deno\.land"],
+            "category": "Programming Languages & Runtimes",
+        },
+        "Symfony": {
+            "patterns": [r"symfony"],
+            "version_patterns": [r"Symfony\s*([\d\.]+)"],
+            "category": "Programming Languages & Runtimes",
+        },
+        "Yii": {
+            "patterns": [r"\byii\b", r"yii2?", r"data-yii-"],
+            "category": "Programming Languages & Runtimes",
+        },
+        "CakePHP": {
+            "patterns": [r"cakephp", r"cakephp-session"],
+            "category": "Programming Languages & Runtimes",
+        },
+        "CodeIgniter": {
+            "patterns": [r"codeigniter", r"ci_session", r"/index\.php\?/"],
+            "category": "Programming Languages & Runtimes",
+        },
+        "NestJS": {
+            "patterns": [r"nestjs", r"@nestjs"],
+            "category": "Programming Languages & Runtimes",
+        },
+        "Fastify": {
+            "patterns": [r"fastify", r"x-fastify"],
+            "category": "Programming Languages & Runtimes",
+        },
+        "Phoenix (LiveView)": {
+            "patterns": [r"data-phx-", r"\bphx-(?:click|change|submit|target)\b", r"phoenix\.js", r"live_view"],
             "category": "Programming Languages & Runtimes",
         },
         "Bun": {
