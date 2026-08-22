@@ -2091,6 +2091,32 @@ class ReportGenerator:
                 }
             });
 
+            // Category filter chips
+            const catChips = document.querySelectorAll('.cat-chip');
+            let activeCat = null;
+            catChips.forEach(chip => {
+                chip.addEventListener('click', function() {
+                    const cat = this.dataset.cat;
+                    activeCat = (activeCat === cat) ? null : cat;
+                    catChips.forEach(c => c.classList.toggle('is-active', c.dataset.cat === activeCat));
+
+                    techCategories.forEach(section => {
+                        const sectionCat = (section.dataset.category || '').toLowerCase();
+                        section.style.display = (!activeCat || sectionCat === activeCat) ? '' : 'none';
+                    });
+
+                    techPills.forEach(pill => {
+                        const pillCat = pill.dataset.category || '';
+                        pill.classList.toggle('is-hidden', !!activeCat && pillCat !== activeCat);
+                    });
+
+                    if (activeCat && searchInput) {
+                        searchInput.value = '';
+                        filterTechs('');
+                    }
+                });
+            });
+
             // Hint chips
             hintChips.forEach(chip => {
                 chip.addEventListener('click', function() {
