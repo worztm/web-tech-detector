@@ -191,6 +191,7 @@ class ReportGenerator:
         social_section = self._build_social_section(social_meta)
         script_section = self._build_script_analysis_section(script_analysis)
         link_section = self._build_link_analysis_section(link_analysis)
+        cookie_section = self._build_cookie_section(self.results.get("cookie_findings", []))
         robots_section = self._build_robots_section(robots)
 
         return f"""<!DOCTYPE html>
@@ -290,6 +291,9 @@ class ReportGenerator:
 
             <!-- Link Analysis -->
             {link_section}
+
+            <!-- Cookie Findings -->
+            {cookie_section}
 
             <!-- robots.txt -->
             {robots_section}
