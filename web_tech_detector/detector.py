@@ -1034,7 +1034,7 @@ TECHNOLOGY_PATTERNS: Dict[str, Dict[str, dict]] = {
             "category": "DevOps & CI/CD",
         },
         "Sentry": {
-            "patterns": [r"sentry"],
+            "patterns": [r"sentry\.io", r"browser\.sentry-cdn\.com", r"@sentry", r"Sentry\.init"],
             "category": "DevOps & CI/CD",
         },
         "Datadog": {
