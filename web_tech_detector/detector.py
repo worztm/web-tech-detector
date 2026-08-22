@@ -584,7 +584,7 @@ TECHNOLOGY_PATTERNS: Dict[str, Dict[str, dict]] = {
             "category": "Programming Languages & Runtimes",
         },
         "Python": {
-            "patterns": [r"python", r"django", r"flask", r"wsgi"],
+            "patterns": [r"Python/", r"wsgi", r"pythonanywhere", r"x-powered-by.*python"],
             "version_patterns": [r"Python/([\d\.]+)"],
             "category": "Programming Languages & Runtimes",
         },
