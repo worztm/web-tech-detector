@@ -208,6 +208,7 @@ class ReportGenerator:
     </style>
 </head>
 <body>
+    <div class="scroll-progress" id="scrollProgress"></div>
     <div class="app">
         <!-- Animated background orbs -->
         <div class="orbs">
@@ -938,6 +939,22 @@ class ReportGenerator:
             position: relative;
             min-height: 100vh;
             overflow: hidden;
+        }
+
+        /* ============================================================
+           Scroll Progress Bar
+           ============================================================ */
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            width: 0%;
+            z-index: 200;
+            background: linear-gradient(90deg, hsl(217 91% 60%), hsl(271 81% 56%), hsl(330 81% 60%));
+            box-shadow: 0 0 12px hsl(217 91% 60% / 0.6);
+            border-radius: 0 2px 2px 0;
+            transition: width 0.08s linear;
         }
 
         .container {
@@ -1885,6 +1902,16 @@ class ReportGenerator:
             const techGridEmpty = document.getElementById('techGridEmpty');
             const resetBtn = document.getElementById('resetSearch');
             const hintChips = document.querySelectorAll('.hint-chip');
+
+            // Scroll progress bar
+            const progressBar = document.getElementById('scrollProgress');
+            function updateScrollProgress() {
+                const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+                const pct = docHeight > 0 ? (window.scrollY / docHeight) * 100 : 0;
+                if (progressBar) progressBar.style.width = pct + '%';
+            }
+            window.addEventListener('scroll', updateScrollProgress, { passive: true });
+            updateScrollProgress();
 
             // Count-up animation for stat cards
             const countUps = document.querySelectorAll('.count-up');
